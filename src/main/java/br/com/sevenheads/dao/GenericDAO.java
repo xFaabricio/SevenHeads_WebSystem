@@ -9,38 +9,45 @@ import javax.transaction.Transactional;
 
 import br.com.sevenheads.jpa.EntityFactory;
 
-public class GenericDAO<T> {
+public class GenericDAO<T> implements br.com.sevenheads.manager.GenericDAO<T> {
 	
 	@Transactional
-	public void save(T entity) {
+	@Override
+	public T save(T entity) {
 		EntityManager entityManager = EntityFactory.getEntityManager();
 		EntityTransaction entityTransaction = entityManager.getTransaction();
 		entityTransaction.begin();		
 		entityManager.persist(entity);
 		entityManager.flush();
-		entityTransaction.commit();		
+		entityTransaction.commit();
+		return entity;
 	}
 	
 	@Transactional
-	public void remove(T entity) {
+	@Override
+	public T remove(T entity) {
 		EntityManager entityManager = EntityFactory.getEntityManager();
 		EntityTransaction entityTransaction = entityManager.getTransaction();
 		entityTransaction.begin();
 		entityManager.remove(entity);
 		entityTransaction.commit();
+		return entity;
 	}
 	
 	@Transactional
-	public void update(T entity) {
+	@Override
+	public T update(T entity) {
 		EntityManager entityManager = EntityFactory.getEntityManager();
 		EntityTransaction entityTransaction = entityManager.getTransaction();
 		entityTransaction.begin();
 		entityManager.merge(entity);
 		entityTransaction.commit();
+		return entity;
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Transactional
+	@Override
 	public T findById(Long id, Class<?> classEntity) {
 		EntityManager entityManager = EntityFactory.getEntityManager();
 		try {
@@ -53,6 +60,7 @@ public class GenericDAO<T> {
 	}
 	
 	@SuppressWarnings("unchecked")
+	@Override
 	public List<T> findAll(Class<?> classEntity){
 		EntityManager entityManager = EntityFactory.getEntityManager();
 		Query query = entityManager.createQuery("SELECT e FROM " + classEntity.getName() + " e");		

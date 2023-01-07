@@ -39,6 +39,8 @@ public class User implements Serializable {
 	
 	private Boolean blocked;
 	
+	private Integer tryQuantity;
+	
 	/**
 	 * Constructor
 	 **/
@@ -159,6 +161,14 @@ public class User implements Serializable {
 
 	public void setBlocked(Boolean blocked) {
 		this.blocked = blocked;
+	}
+
+	public Integer getTryQuantity() {
+		return tryQuantity != null ? tryQuantity : 0 ;
+	}
+
+	public void setTryQuantity(Integer tryQuantity) {
+		this.tryQuantity = tryQuantity;
 	}	
 	
 }
