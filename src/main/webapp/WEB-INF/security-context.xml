@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:sec="http://www.springframework.org/schema/security"
+	xmlns:cache="http://www.springframework.org/schema/cache"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+						http://www.springframework.org/schema/security 
+						http://www.springframework.org/schema/security/spring-security-5.3.xsd
+		                http://www.springframework.org/schema/context 
+		                http://www.springframework.org/schema/context/spring-context.xsd
+		                http://www.springframework.org/schema/cache
+		                http://www.springframework.org/schema/cache/spring-cache.xsd
+		                http://www.springframework.org/schema/tx
+		                http://www.springframework.org/schema/tx/spring-tx.xsd">
+	
+	<sec:http pattern="/images/**" security="none"/>
+	<sec:http pattern="/login.xhtml*" security="none"/>
+	<sec:http pattern="/error.xhtml*" security="none"/>
+	<sec:http pattern="/dashboard.xhtml*" security="none"/>
+	<sec:http pattern="/javax.faces.resource/**" security="none"/>
+	
+	<sec:http auto-config="true" authentication-manager-ref="authenticationManager">
+		<sec:form-login login-page="/login.xhtml" authentication-details-source-ref="authenticationDetailsSource"
+			authentication-success-handler-ref="authenticationSuccessHandlerManagerImpl"
+			authentication-failure-handler-ref="authenticationFailureHandlerManagerImpl"
+			authentication-failure-url="/login.xhtml?error=loginError" />
+
+		<sec:logout logout-url="/logout.xhtml" success-handler-ref="memcachedLogout"  />		
+
+<!-- 		<sec:intercept-url pattern="/login.xhtml*" access="IS_AUTHENTICATED_ANONYMOUSLY" />		 -->
+<!-- 		<sec:intercept-url pattern="/error.xhtml*" access="IS_AUTHENTICATED_ANONYMOUSLY" /> -->
+<!-- 		<sec:intercept-url pattern="/forgotpassword.xhtml*" access="IS_AUTHENTICATED_ANONYMOUSLY" /> -->		
+		
+		<sec:intercept-url pattern="/**" access="hasRole('ROLE_USER')" />		
+	</sec:http>
+
+	<bean id="userDetailManager" 
+		class="br.com.sevenheads.security.UserDetailsManagerImpl" autowire="byName" />	
+
+	<bean id="bcrypt" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+
+	<sec:authentication-manager alias="authenticationManager">
+		<sec:authentication-provider user-service-ref="userDetailManager">
+			 <sec:password-encoder ref="bcrypt" />
+		</sec:authentication-provider>
+	</sec:authentication-manager>
+	
+	<bean id="authenticationDetailsSource" 
+		class="br.com.sevenheads.security.UserWebAuthenticationDetailsSource" />
+
+	<bean id="authenticationSuccessHandlerManagerImpl"
+		class="br.com.sevenheads.security.AuthenticationSuccessHandlerManagerImpl" />
+		
+	<bean id="authenticationFailureHandlerManagerImpl"
+		class="br.com.sevenheads.security.AuthenticationFailureHandlerManagerImpl" />
+
+	<bean id="securityContextPersistenceFilter"
+		class="org.springframework.security.web.context.SecurityContextPersistenceFilter">
+		<constructor-arg name="repo" ref="memcachedRepository" />
+	</bean>	
+
+	<bean id="memcachedRepository"
+		class="br.com.sevenheads.security.MemcachedRepository" />
+		
+	<bean id="memcachedLogout"
+		class="br.com.sevenheads.security.MemcachedLogout" />	
+	
+	<cache:annotation-driven/>
+	
+	<bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">
+	    <property name="caches">
+	        <set>
+	            <bean
+	                class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean"
+	                p:name="task" />
+	        </set>
+	    </property>
+    </bean>
+	
+</beans>
