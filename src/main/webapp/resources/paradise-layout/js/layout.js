@@ -429,7 +429,6 @@ PrimeFaces.ParadiseConfigurator = {
     },
     
     changeMenuToDarkTheme: function() {
-		console.log('rodou');
         $('.layout-content').toggleClass('layout-theme-dark');
         $('.card').toggleClass('layout-theme-dark-card');                       
         $('.layout-footer').toggleClass('layout-theme-dark-footer');

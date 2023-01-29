@@ -16,7 +16,7 @@
 </h:head>
 
 <h:body styleClass="login-body">
-    <h:form>
+    <h:form id="form-login" prepandId="false">
         <div class="login-panel ui-fluid">
             <div class="grid grid-nogutter">
                 <div class="col-12 logo-container">
@@ -28,7 +28,7 @@
                 <div class="col-12">
                     <p:outputLabel for="username" value="Username"/>
                     <div class="input-wrapper">
-                        <p:inputText id="username" placeholder="Username"/>
+                        <p:inputText id="username" name="username" placeholder="Username" value="#{loginBean.username}"/>
                         <p:graphicImage name="images/login/user.png" library="paradise-layout"
                                         styleClass="user-icon"/>
                     </div>
@@ -36,7 +36,7 @@
                 <div class="col-12">
                     <p:outputLabel for="password" value="Password"/>
                     <div class="input-wrapper">
-                        <p:password id="password" placeholder="Password" feedback="false"/>
+                        <p:password id="password" name="password" placeholder="Password" feedback="false" value="#{loginBean.password}"/>
                         <p:graphicImage name="images/login/lock.png" library="paradise-layout"
                                         styleClass="lock-icon"/>
                     </div>
@@ -45,7 +45,8 @@
                     <a href="">Forgot password?</a>
                 </div>
                 <div class="col-12 button-container">
-                    <p:button outcome="/dashboard" value="Sign In" styleClass="ui-button-info ui-button-raised"/>
+                    <p:commandButton id="signIn" value="Sign In" styleClass="ui-button-info ui-button-raised" action="#{loginBean.submit}" ajax="false"/>
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 </div>
             </div>
         </div>
