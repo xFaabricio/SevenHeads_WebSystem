@@ -235,26 +235,28 @@ public class GuestPreferences implements Serializable {
         }
     }
     
-    public void updateTopbar() {    	
-    	if(layout.equals("default")) {
-	    	if(darkTheme) {
-	    		setLogoBlack(false);
-	    	}else {
-	    		setLogoBlack(true);
-	    	}
-	    	
-	    	FacesContext facesContext = FacesContext.getCurrentInstance();
-	    	facesContext.getPartialViewContext().getRenderIds().add("topbar");    	
-	    	
-	    	if(!logoBlack) {
-		    	PrimeFaces.current().executeScript("$('.topbar').toggleClass('layout-theme-dark-topbar');");
-		    	PrimeFaces.current().executeScript("$('.topbar-wrapper').toggleClass('layout-theme-dark-topbar');");
-	    	}
-    	}else if(layout.equals("Bliss") || layout.equals("Crimson") || layout.equals("Deep-Sea") || layout.equals("Horizon") || layout.equals("Smoke")) {
+    public void updateTopbar() {
+    	
+    	FacesContext facesContext = FacesContext.getCurrentInstance();    	
+    	if(darkTheme) {
     		setLogoBlack(false);
-    		FacesContext facesContext = FacesContext.getCurrentInstance();
-	    	facesContext.getPartialViewContext().getRenderIds().add("topbar");
+    	}else {
+    		setLogoBlack(true);
     	}
+    	
+    	if(layout.equals("default")) {	    		    		    		    	
+	    	if(!logoBlack) {	    		
+		    	PrimeFaces.current().executeScript("$('.topbar').toggleClass('layout-theme-dark-topbar');");
+		    	PrimeFaces.current().executeScript("$('.topbar-wrapper').toggleClass('layout-theme-dark-topbar');");	    		
+	    	}
+    	}else if(layout.equals("bliss") || layout.equals("cheer") || layout.equals("crimson") 
+    				|| layout.equals("deepsea") || layout.equals("disco") || layout.equals("horizon") 
+    				|| layout.equals("opa") || layout.equals("sunset") || layout.equals("smoke")) {    			    	
+	    	PrimeFaces.current().executeScript("$('.topbar').removeClass('layout-theme-dark-topbar');");
+	    	PrimeFaces.current().executeScript("$('.topbar-wrapper').removeClass('layout-theme-dark-topbar');");
+    	}
+    	
+    	facesContext.getPartialViewContext().getRenderIds().add("topbar");
     }
     	
     public Boolean darkMenuValue() {

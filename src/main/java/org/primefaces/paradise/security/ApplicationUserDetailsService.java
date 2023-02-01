@@ -1,10 +1,10 @@
 package org.primefaces.paradise.security;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
+import org.primefaces.paradise.entity.Role;
 import org.primefaces.paradise.entity.User;
 import org.primefaces.paradise.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,12 +29,18 @@ public class ApplicationUserDetailsService implements UserDetailsService {
 			throw new UsernameNotFoundException(username);
 		}
 		
-		return new UserSystem(user, !user.getBlocked(), true, true, true, Arrays.asList(new SimpleGrantedAuthority("ROLE_USER")));
+		return new UserSystem(user, !user.getBlocked(), true, true, true, getRoles(user));
 	}
-	
-	@SuppressWarnings("unused")
+		
 	private Collection<? extends GrantedAuthority> getRoles(User user){
-		List<SimpleGrantedAuthority> roles = new ArrayList<>();		
+		List<SimpleGrantedAuthority> roles = new ArrayList<>();
+		
+		List<Role> userRoles = userRepository.findUserRoles(user);
+		
+		for(Role role : userRoles) {
+			roles.add(new SimpleGrantedAuthority(role.getKey()));
+		}
+		
 		return roles;
 	}
 

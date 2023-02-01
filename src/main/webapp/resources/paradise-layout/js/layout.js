@@ -432,8 +432,7 @@ PrimeFaces.ParadiseConfigurator = {
         $('.layout-content').toggleClass('layout-theme-dark');
         $('.card').toggleClass('layout-theme-dark-card');                       
         $('.layout-footer').toggleClass('layout-theme-dark-footer');
-        $('.topbar-wrapper').toggleClass('layout-theme-dark-topbar');        
-        $('.topbar').toggleClass('layout-theme-dark-topbar');
+        
         $('.ui-paginator').toggleClass('layout-theme-dark-card');
         $('.layout-config-content').toggleClass('layout-theme-dark-card');
         $('td').toggleClass('layout-theme-dark-table-td');
@@ -441,7 +440,7 @@ PrimeFaces.ParadiseConfigurator = {
         $('td').toggleClass('layout-theme-dark-card');
         $('th').toggleClass('layout-theme-dark-card');
         $('body .ui-selectonemenu').toggleClass('layout-theme-dark-table-th');
-		$('.ui-selectonemenu').toggleClass('layout-theme-dark-topbar');		
+				
 		$('#topbar-menu > li a').toggleClass('layout-theme-dark-card');
 		$('.payments > ul > li').toggleClass('layout-theme-dark-ul-li');
 		$('.tasks > ul > li').toggleClass('layout-theme-dark-ul-li');

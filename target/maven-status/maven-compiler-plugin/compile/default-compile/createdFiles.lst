@@ -17,6 +17,7 @@ org\primefaces\paradise\filter\CharacterEncodingFilter.class
 org\primefaces\paradise\controller\UserController.class
 org\primefaces\paradise\view\FreeBlocksDemoView.class
 org\primefaces\paradise\domain\Customer.class
+org\primefaces\paradise\entity\Role.class
 org\primefaces\paradise\view\ListDemoView.class
 org\primefaces\paradise\domain\Photo.class
 org\primefaces\paradise\view\MessageDemoView.class

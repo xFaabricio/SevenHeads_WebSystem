@@ -2,11 +2,17 @@ package org.primefaces.paradise.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -43,12 +49,26 @@ public class User implements Serializable {
 	
 	private Integer tryQuantity;
 	
+	@ManyToMany(cascade = CascadeType.MERGE)
+	@JoinTable(name = "sh_user_roles",
+			joinColumns= {@JoinColumn(name="user_id", referencedColumnName = "id")},
+			inverseJoinColumns = {@JoinColumn(name="role_id", referencedColumnName = "id")})
+	private List<Role> roles;
+		
+	@Lob
+	private byte[] userPhoto;
+	
 	/**
 	 * Constructor
-	 **/
-	
+	 **/	
+	public User() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	public User(Long id, String name, String login, String password, String email, Date lastLogin, Date createDate,
-			Date updateDate) {
+			Date updateDate, Date inactiveDate, Date blockedDate, Boolean active, Boolean blocked, Integer tryQuantity,
+			List<Role> roles, byte[] userPhoto) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -58,11 +78,13 @@ public class User implements Serializable {
 		this.lastLogin = lastLogin;
 		this.createDate = createDate;
 		this.updateDate = updateDate;
-	}
-	
-	public User() {
-		super();
-		// TODO Auto-generated constructor stub
+		this.inactiveDate = inactiveDate;
+		this.blockedDate = blockedDate;
+		this.active = active;
+		this.blocked = blocked;
+		this.tryQuantity = tryQuantity;
+		this.roles = roles;
+		this.userPhoto = userPhoto;
 	}
 
 	/**
@@ -171,6 +193,22 @@ public class User implements Serializable {
 
 	public void setTryQuantity(Integer tryQuantity) {
 		this.tryQuantity = tryQuantity;
+	}
+
+	public List<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
+	}
+
+	public byte[] getUserPhoto() {
+		return userPhoto;
+	}
+
+	public void setUserPhoto(byte[] userPhoto) {
+		this.userPhoto = userPhoto;
 	}	
 	
 }

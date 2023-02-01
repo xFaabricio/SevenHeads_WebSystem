@@ -66,7 +66,7 @@
                                                actionListener="#{guestPreferences.setLayout(layoutColor.file)}"
                                                onstart="PrimeFaces.ParadiseConfigurator.beforeResourceChange()"
                                                update=":config-form logolink"
-                                               oncomplete="PrimeFaces.ParadiseConfigurator.changePrimaryColor('#{layoutColor.file}')">
+                                               oncomplete="PrimeFaces.ParadiseConfigurator.changePrimaryColor('#{layoutColor.file}'), updateTopbar();">
                                     <span class="layout-config-option-color"
                                           style="background-image: linear-gradient(to right,#{layoutColor.color1},#{layoutColor.color2})"></span>
                                     <ui:fragment rendered="#{layoutColor.file eq guestPreferences.layout}">
