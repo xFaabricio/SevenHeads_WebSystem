@@ -22,9 +22,7 @@ import org.springframework.stereotype.Service;
 public class ApplicationUserDetailsService implements UserDetailsService {
 	
 	@Autowired
-	private UserRepository userRepository;
-	
-	EmailService emailService = new EmailService();
+	private UserRepository userRepository;	
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -32,14 +30,6 @@ public class ApplicationUserDetailsService implements UserDetailsService {
 		
 		if(user == null) {
 			throw new UsernameNotFoundException(username);
-		}
-		
-		try {
-			emailService.sendEmail("contato@sevenheads.com.br", "Teste envio de e-mail", "E-mail Enviado !!");
-		} catch (MessagingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			System.out.println(e.getStackTrace().toString());
 		}
 		
 		return new UserSystem(user, !user.getBlocked(), true, true, true, getRoles(user));
