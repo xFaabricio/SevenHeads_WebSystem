@@ -4,12 +4,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import javax.mail.MessagingException;
-
 import org.primefaces.paradise.entity.Role;
 import org.primefaces.paradise.entity.User;
 import org.primefaces.paradise.repository.UserRepository;
-import org.primefaces.paradise.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
