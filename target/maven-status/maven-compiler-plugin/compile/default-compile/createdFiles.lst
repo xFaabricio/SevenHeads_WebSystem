@@ -26,7 +26,6 @@ org\primefaces\paradise\entity\User.class
 org\primefaces\paradise\bean\LoginBean.class
 org\primefaces\paradise\view\FormDemoView.class
 org\primefaces\paradise\util\SpringUtils.class
-org\primefaces\paradise\service\EmailService$1.class
 org\primefaces\paradise\domain\Product.class
 org\primefaces\paradise\view\ChronolineView$Event.class
 org\primefaces\paradise\repository\UserRepository.class
