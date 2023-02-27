@@ -7,11 +7,13 @@ import org.apache.commons.configuration2.builder.FileBasedConfigurationBuilder;
 import org.apache.commons.configuration2.builder.fluent.Parameters;
 import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.SimpleEmail;
+import org.springframework.stereotype.Service;
 
+@Service
 public class EmailService {
 
 	@SuppressWarnings("deprecation")
-	public void sendEmail(String to, String subject, String body) throws MessagingException {
+	public void sendEmail(String to, String subject, String body, Boolean isHtml) throws MessagingException {
         try {
             Parameters params = new Parameters();
             FileBasedConfigurationBuilder<PropertiesConfiguration> builder =
@@ -37,6 +39,10 @@ public class EmailService {
 			simpleEmail.addTo(to);
 			simpleEmail.setSubject(subject);
 			simpleEmail.setMsg(body);
+			if(isHtml) {
+				simpleEmail.setContent(body, "text/html; charset=utf-8");
+			}
+			
 			simpleEmail.send();            
         } catch (Exception e) {
             // trate exceções aqui

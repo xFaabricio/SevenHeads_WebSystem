@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,7 +14,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.primefaces.paradise.view.GuestPreferences;
 
 @Entity
 @Table(name = "sh_user")
@@ -49,12 +53,28 @@ public class User implements Serializable {
 	
 	private Integer tryQuantity;
 	
+	private String countryCode;
+	
+	private String phoneNumber;
+	
+	private Boolean firstLogin;
+	
+	private Boolean changePassword;
+	
+	private Boolean verified;
+	
 	@ManyToMany(cascade = CascadeType.MERGE)
 	@JoinTable(name = "sh_user_roles",
 			joinColumns= {@JoinColumn(name="user_id", referencedColumnName = "id")},
 			inverseJoinColumns = {@JoinColumn(name="role_id", referencedColumnName = "id")})
 	private List<Role> roles;
-		
+	
+	@Column(name="id_user_update")
+	private User updateUser;
+	
+	@OneToOne
+	private GuestPreferences guestPreferences;
+	
 	@Lob
 	private byte[] userPhoto;
 	
@@ -68,7 +88,8 @@ public class User implements Serializable {
 
 	public User(Long id, String name, String login, String password, String email, Date lastLogin, Date createDate,
 			Date updateDate, Date inactiveDate, Date blockedDate, Boolean active, Boolean blocked, Integer tryQuantity,
-			List<Role> roles, byte[] userPhoto) {
+			String countryCode, String phoneNumber, Boolean firstLogin, Boolean changePassword, Boolean verified,
+			List<Role> roles, User updateUser, GuestPreferences guestPreferences, byte[] userPhoto) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -83,7 +104,14 @@ public class User implements Serializable {
 		this.active = active;
 		this.blocked = blocked;
 		this.tryQuantity = tryQuantity;
+		this.countryCode = countryCode;
+		this.phoneNumber = phoneNumber;
+		this.firstLogin = firstLogin;
+		this.changePassword = changePassword;
+		this.verified = verified;
 		this.roles = roles;
+		this.updateUser = updateUser;
+		this.guestPreferences = guestPreferences;
 		this.userPhoto = userPhoto;
 	}
 
@@ -209,6 +237,62 @@ public class User implements Serializable {
 
 	public void setUserPhoto(byte[] userPhoto) {
 		this.userPhoto = userPhoto;
+	}
+
+	public User getUpdateUser() {
+		return updateUser;
+	}
+
+	public void setUpdateUser(User updateUser) {
+		this.updateUser = updateUser;
+	}
+
+	public GuestPreferences getGuestPreferences() {
+		return guestPreferences;
+	}
+
+	public void setGuestPreferences(GuestPreferences guestPreferences) {
+		this.guestPreferences = guestPreferences;
+	}
+
+	public String getCountryCode() {
+		return countryCode;
+	}
+
+	public void setCountryCode(String countryCode) {
+		this.countryCode = countryCode;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	public Boolean getFirstLogin() {
+		return firstLogin;
+	}
+
+	public void setFirstLogin(Boolean firstLogin) {
+		this.firstLogin = firstLogin;
+	}
+
+	public Boolean getChangePassword() {
+		return changePassword;
+	}
+
+	public void setChangePassword(Boolean changePassword) {
+		this.changePassword = changePassword;
+	}
+
+	public Boolean getVerified() {
+		return verified;
+	}
+
+	public void setVerified(Boolean verified) {
+		this.verified = verified;
 	}	
 	
 }

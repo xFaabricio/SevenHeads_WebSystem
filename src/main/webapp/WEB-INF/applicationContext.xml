@@ -35,6 +35,7 @@
 		<sec:intercept-url pattern="/error.xhtml*" access="isAuthenticated()" />
 		<sec:intercept-url pattern="/access.xhtml*" access="isAuthenticated()" />
 		<sec:intercept-url pattern="/login.xhtml*" access="permitAll"/>
+		<sec:intercept-url pattern="/signUp.xhtml*" access="permitAll"/>
 		<sec:intercept-url pattern="/landing.xhtml*" access="permitAll"/>
 		<sec:intercept-url pattern="/**" access="denyAll" />
 		

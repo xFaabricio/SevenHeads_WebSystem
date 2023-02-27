@@ -10,12 +10,15 @@ org\primefaces\paradise\view\ChronolineView.class
 org\primefaces\paradise\view\GridDemoView.class
 org\primefaces\paradise\security\ApplicationUserDetailsService.class
 org\primefaces\paradise\domain\CustomerStatus.class
+org\primefaces\paradise\repository\RoleRepository.class
+org\primefaces\paradise\repository\GuestPreferenceRepository.class
 org\primefaces\paradise\view\DataTableDemoView.class
 org\primefaces\paradise\jpa\GenericDAO.class
 org\primefaces\paradise\domain\Representative.class
 org\primefaces\paradise\filter\CharacterEncodingFilter.class
 org\primefaces\paradise\controller\UserController.class
 org\primefaces\paradise\view\FreeBlocksDemoView.class
+org\primefaces\paradise\controller\RoleController.class
 org\primefaces\paradise\domain\Customer.class
 org\primefaces\paradise\entity\Role.class
 org\primefaces\paradise\view\ListDemoView.class
@@ -52,6 +55,7 @@ org\primefaces\paradise\service\PhotoService.class
 org\primefaces\paradise\view\CalendarDemoView.class
 org\primefaces\paradise\service\OrderService.class
 org\primefaces\paradise\component\ParadiseMenu.class
+org\primefaces\paradise\controller\GuestPreferencesController.class
 org\primefaces\paradise\domain\Country.class
 org\primefaces\paradise\view\GuestPreferences$SpecialLayout.class
 org\primefaces\paradise\blockviewer\BlockViewer.class

@@ -1,8 +1,10 @@
+C:\git\paradise\src\main\java\org\primefaces\paradise\repository\GuestPreferenceRepository.java
 C:\git\paradise\src\main\java\org\primefaces\paradise\view\ChronolineView.java
 C:\git\paradise\src\main\java\org\primefaces\paradise\service\ProductService.java
 C:\git\paradise\src\main\java\org\primefaces\paradise\view\GuestPreferences.java
 C:\git\paradise\src\main\java\org\primefaces\paradise\service\SmsService.java
 C:\git\paradise\src\main\java\org\primefaces\paradise\domain\CustomerStatus.java
+C:\git\paradise\src\main\java\org\primefaces\paradise\controller\RoleController.java
 C:\git\paradise\src\main\java\org\primefaces\paradise\view\CrudDemoView.java
 C:\git\paradise\src\main\java\org\primefaces\paradise\view\ChartDemoView.java
 C:\git\paradise\src\main\java\org\primefaces\paradise\view\FileDemoView.java
@@ -20,6 +22,7 @@ C:\git\paradise\src\main\java\org\primefaces\paradise\domain\Order.java
 C:\git\paradise\src\main\java\org\primefaces\paradise\util\SpringUtils.java
 C:\git\paradise\src\main\java\org\primefaces\paradise\controller\UserController.java
 C:\git\paradise\src\main\java\org\primefaces\paradise\jpa\EntityFactory.java
+C:\git\paradise\src\main\java\org\primefaces\paradise\controller\GuestPreferencesController.java
 C:\git\paradise\src\main\java\org\primefaces\paradise\service\DocumentService.java
 C:\git\paradise\src\main\java\org\primefaces\paradise\view\MessageDemoView.java
 C:\git\paradise\src\main\java\org\primefaces\paradise\view\TreeDemoView.java
@@ -37,6 +40,7 @@ C:\git\paradise\src\main\java\org\primefaces\paradise\service\PhotoService.java
 C:\git\paradise\src\main\java\org\primefaces\paradise\domain\Document.java
 C:\git\paradise\src\main\java\org\primefaces\paradise\entity\Role.java
 C:\git\paradise\src\main\java\org\primefaces\paradise\component\ParadiseMenuRenderer.java
+C:\git\paradise\src\main\java\org\primefaces\paradise\repository\RoleRepository.java
 C:\git\paradise\src\main\java\org\primefaces\paradise\component\ParadiseMenu.java
 C:\git\paradise\src\main\java\org\primefaces\paradise\domain\Product.java
 C:\git\paradise\src\main\java\org\primefaces\paradise\filter\CharacterEncodingFilter.java

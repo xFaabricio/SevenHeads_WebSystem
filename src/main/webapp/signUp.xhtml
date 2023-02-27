@@ -16,7 +16,8 @@
 </h:head>
 
 <h:body styleClass="login-body">
-    <h:form id="form-login" prepandId="false">
+    <h:form id="form-register" prepandId="false">
+    	<p:growl id="growl" showDetail="true" />
         <div class="login-panel ui-fluid">
             <div class="grid grid-nogutter">
                 <div class="col-12 logo-container">
@@ -26,9 +27,19 @@
                     <h2>Welcome to Paradise</h2>
                 </div>
                 <div class="col-12">
+                    <p:outputLabel for="email" value="E-mail"/>
+                    <div class="input-wrapper">
+                        <p:inputText id="email" name="E-mail" placeholder="E-mail" value="#{loginBean.email}" validator="#{loginBean.verifyEmail}">
+                        	<f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+                        </p:inputText>
+                        <p:graphicImage name="images/login/email.png" library="paradise-layout"
+                                        styleClass="user-icon"/>
+                    </div>
+                </div>
+                <div class="col-12">
                     <p:outputLabel for="username" value="Username"/>
                     <div class="input-wrapper">
-                        <p:inputText id="username" name="username" placeholder="Username" value="#{loginBean.username}"/>
+                        <p:inputText id="username" name="username" placeholder="Username" value="#{loginBean.username}" validator="#{loginBean.verifyUsername}"/>
                         <p:graphicImage name="images/login/user.png" library="paradise-layout"
                                         styleClass="user-icon"/>
                     </div>
@@ -41,14 +52,10 @@
                                         styleClass="lock-icon"/>
                     </div>
                 </div>
-                <div class="col-12 chkbox-container">
-                    <a href="">Forgot password?</a>
-                </div>
                 <div class="col-12 button-container">
-                    <p:commandButton id="signIn" value="Sign In" styleClass="ui-button-info ui-button-raised" action="#{loginBean.submit}" ajax="false"/>
-                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                	<p:commandButton id="register" value="Register" styleClass="ui-button-success ui-button-raised" action="#{loginBean.register}" ajax="false"/>                    
                     <p:separator style="padding: 0.5rem !important;width: 100%;"/>
-                    <p:commandButton id="signUp" value="Sign up" styleClass="ui-button-success ui-button-raised" action="#{loginBean.redirectSignUp}"/>                    
+					<p:commandButton id="backToSignIn" value="Sign In" styleClass="ui-button-info ui-button-raised" action="#{loginBean.redirectSignIn}" immediate="true"/>                                                            
                 </div>                
             </div>
         </div>

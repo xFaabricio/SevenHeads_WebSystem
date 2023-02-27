@@ -45,6 +45,15 @@
                     </p:inputSwitch>                                        
                 </p:outputPanel>
 				
+				<p:outputPanel id="logo-style" styleClass="layout-config-section dark">
+                    <span class="section-name">Logo Black</span>
+                    <p:inputSwitch id="layout-logo-switch-2" value="#{guestPreferences.logoBlack}"
+                                   onchange="updateTopbar();">
+						<p:remoteCommand name="updateTopbar" action="#{guestPreferences.updateTopbar()}"/>
+                        <p:ajax onstart="PrimeFaces.ParadiseConfigurator.beforeResourceChange()" update="config-form"/>
+                    </p:inputSwitch>                                        
+                </p:outputPanel>
+				
                 <p:outputPanel id="outlined-panel" styleClass="layout-config-section options">
                     <span class="section-name">Form Type</span>
                     <div class="grid layout-config-options">
