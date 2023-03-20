@@ -122,7 +122,7 @@ public class LoginBean implements Serializable {
 				
 				try {
 					EmailService emailService = new EmailService();
-					emailService.sendEmail(this.email, "SevenHeads - Account Created", "Welcome " + this.username + " !! <br><br> Thank you.", true);
+					emailService.sendEmailWelcome(email, username);
 				} catch (Exception e) {
 					// DO NOTHING
 				}
