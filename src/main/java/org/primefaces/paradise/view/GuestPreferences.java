@@ -33,6 +33,7 @@ import javax.persistence.Transient;
 
 import org.primefaces.PrimeFaces;
 import org.primefaces.paradise.entity.User;
+import org.primefaces.paradise.security.UserDetailsUtil;
 
 @Named
 @SessionScoped
@@ -334,6 +335,10 @@ public class GuestPreferences implements Serializable {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public String getLogin() {
+		return UserDetailsUtil.getLoggedUser().getUsername();
 	}
 	
 }

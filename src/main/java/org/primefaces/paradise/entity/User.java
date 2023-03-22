@@ -57,6 +57,8 @@ public class User implements Serializable {
 	
 	private String phoneNumber;
 	
+	private String codeRecoveryPassword;
+	
 	private Boolean firstLogin;
 	
 	private Boolean changePassword;
@@ -293,6 +295,14 @@ public class User implements Serializable {
 
 	public void setVerified(Boolean verified) {
 		this.verified = verified;
-	}	
+	}
+
+	public String getCodeRecoveryPassword() {
+		return codeRecoveryPassword;
+	}
+
+	public void setCodeRecoveryPassword(String codeRecoveryPassword) {
+		this.codeRecoveryPassword = codeRecoveryPassword;
+	}			
 	
 }

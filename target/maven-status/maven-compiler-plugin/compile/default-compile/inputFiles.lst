@@ -4,6 +4,7 @@ C:\git\paradise\src\main\java\org\primefaces\paradise\service\ProductService.jav
 C:\git\paradise\src\main\java\org\primefaces\paradise\view\GuestPreferences.java
 C:\git\paradise\src\main\java\org\primefaces\paradise\service\SmsService.java
 C:\git\paradise\src\main\java\org\primefaces\paradise\domain\CustomerStatus.java
+C:\git\paradise\src\main\java\org\primefaces\paradise\security\UserDetailsUtil.java
 C:\git\paradise\src\main\java\org\primefaces\paradise\controller\RoleController.java
 C:\git\paradise\src\main\java\org\primefaces\paradise\view\CrudDemoView.java
 C:\git\paradise\src\main\java\org\primefaces\paradise\view\ChartDemoView.java
