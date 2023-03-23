@@ -10,4 +10,5 @@ public interface GuestPreferenceRepository {
 	
 	GuestPreferences updateEntity(GuestPreferences guestPreferences);
 	
+	GuestPreferences findByLogin(String login);
 }

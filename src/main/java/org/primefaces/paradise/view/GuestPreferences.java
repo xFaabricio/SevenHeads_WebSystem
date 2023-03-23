@@ -22,6 +22,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -32,6 +33,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.primefaces.PrimeFaces;
+import org.primefaces.paradise.controller.GuestPreferencesController;
 import org.primefaces.paradise.entity.User;
 import org.primefaces.paradise.security.UserDetailsUtil;
 
@@ -76,6 +78,15 @@ public class GuestPreferences implements Serializable {
     @Transient
     private boolean firstChange = true;
     
+    @Transient
+    @Inject
+    GuestPreferencesController guestPreferencesController;
+    
+    @Transient
+    private GuestPreferences loadedGuestPreferences;
+    
+    @Transient
+    private boolean calledFirstTime = false; 
     @PostConstruct
     public void init() {
         componentThemes = new ArrayList<>();
@@ -118,7 +129,11 @@ public class GuestPreferences implements Serializable {
         return layout;
     }
 
-    public void setLayout(String layout) {    	
+    public void setLayout(String layout) {    	        
+        if(!layout.equals(this.loadedGuestPreferences.getLayout())) {        	
+	        this.loadedGuestPreferences = this;
+	        guestPreferencesController.update(this.loadedGuestPreferences);
+        }
         this.layout = layout;
     }
 
@@ -129,7 +144,11 @@ public class GuestPreferences implements Serializable {
         return theme;
     }
 
-    public void setTheme(String theme) {
+    public void setTheme(String theme) {        
+        if(!theme.equals(this.loadedGuestPreferences.getTheme())) {        	
+	        this.loadedGuestPreferences = this;
+	        guestPreferencesController.update(this.loadedGuestPreferences);
+        }
         this.theme = theme;
     }
 
@@ -140,7 +159,11 @@ public class GuestPreferences implements Serializable {
         return this.menuMode;
     }
     
-    public void setMenuMode(String menuMode) {
+    public void setMenuMode(String menuMode) {        
+        if(!menuMode.equals(this.loadedGuestPreferences.getMenuMode())) {        	
+	        this.loadedGuestPreferences = this;
+	        guestPreferencesController.update(this.loadedGuestPreferences);
+        }
         this.menuMode = menuMode;
     }
 
@@ -152,7 +175,11 @@ public class GuestPreferences implements Serializable {
     	return this.darkMenu;
     }
     
-    public void setDarkMenu(boolean value) {
+    public void setDarkMenu(boolean value) {        
+        if(value != this.loadedGuestPreferences.getDarkMenu()) {        	
+	        this.loadedGuestPreferences = this;
+	        guestPreferencesController.update(this.loadedGuestPreferences);
+        }
         this.darkMenu = value;
     }
 
@@ -164,7 +191,11 @@ public class GuestPreferences implements Serializable {
     	return darkTheme;
     }
 
-	public void setDarkTheme(boolean darkTheme) {
+	public void setDarkTheme(boolean darkTheme) {		
+		if(darkTheme != this.loadedGuestPreferences.getDarkTheme()) {			
+			this.loadedGuestPreferences = this;
+			guestPreferencesController.update(this.loadedGuestPreferences);
+		}
 		this.darkTheme = darkTheme;
 	}
 	
@@ -172,7 +203,11 @@ public class GuestPreferences implements Serializable {
 		return logoBlack;
 	}
 
-	public void setLogoBlack(boolean logoBlack) {
+	public void setLogoBlack(boolean logoBlack) {		
+		if(logoBlack != this.loadedGuestPreferences.isLogoBlack()) {			
+			this.loadedGuestPreferences = this;
+			guestPreferencesController.update(this.loadedGuestPreferences);
+		}
 		this.logoBlack = logoBlack;
 	}
 
@@ -180,7 +215,11 @@ public class GuestPreferences implements Serializable {
         return inputStyle;
     }
 
-    public void setInputStyle(String inputStyle) {
+    public void setInputStyle(String inputStyle) {        
+        if(!inputStyle.equals(this.loadedGuestPreferences.getInputStyle())) {        	
+	        this.loadedGuestPreferences = this;
+	        guestPreferencesController.update(this.loadedGuestPreferences);
+        }
         this.inputStyle = inputStyle;
     }
 
@@ -281,7 +320,9 @@ public class GuestPreferences implements Serializable {
     public void updateTopbar() {
     	
     	FacesContext facesContext = FacesContext.getCurrentInstance();    	
-
+    	boolean isSpecial = false;    	
+    	boolean updateTopbarId = false;
+    	
     	if(layout.equals("default")) {	    		    		    		    	
 	    	if(!logoBlack) {	    		
 		    	PrimeFaces.current().executeScript("$('.topbar').toggleClass('layout-theme-dark-topbar');");
@@ -289,20 +330,23 @@ public class GuestPreferences implements Serializable {
 	    	}
     	}else if(layout.equals("bliss") || layout.equals("cheer") || layout.equals("crimson") 
     				|| layout.equals("deepsea") || layout.equals("disco") || layout.equals("horizon") 
-    				|| layout.equals("opa") || layout.equals("sunset") || layout.equals("smoke")) {
+    				|| layout.equals("opa") || layout.equals("sunset") || layout.equals("smoke")) { 
+    		isSpecial = true;
     		
-    		if(firstChange) {
+    		if(firstChange && isLogoBlack()) {
     			setLogoBlack(false);
     			firstChange = false;
-    		}
+    			updateTopbarId = true;
+    		}    		
     		
-	    	PrimeFaces.current().executeScript("$('.topbar').removeClass('layout-theme-dark-topbar');");
+    		PrimeFaces.current().executeScript("$('.topbar').removeClass('layout-theme-dark-topbar');");
 	    	PrimeFaces.current().executeScript("$('.topbar-wrapper').removeClass('layout-theme-dark-topbar');");
     	}
     	
-    	facesContext.getPartialViewContext().getRenderIds().add("user-display");
-    	facesContext.getPartialViewContext().getRenderIds().add("topbar");
-    	facesContext.getPartialViewContext().getRenderIds().add("config-form");
+    	if(isSpecial && updateTopbarId) {
+	    	facesContext.getPartialViewContext().getRenderIds().add("topbar");
+	    	facesContext.getPartialViewContext().getRenderIds().add("config-form");
+    	}
     }
     
     public boolean activeLogoWhite() {
@@ -338,7 +382,26 @@ public class GuestPreferences implements Serializable {
 	}
 
 	public String getLogin() {
-		return UserDetailsUtil.getLoggedUser().getUsername();
+		String login = UserDetailsUtil.getLoggedUser().getUsername();
+		if(!calledFirstTime) {
+			loadGuestPreferencesByLogin(login);		
+			PrimeFaces.current().executeScript("PrimeFaces.ParadiseConfigurator.changePrimaryColor('"+getLayout()+"');");
+			calledFirstTime = true;
+		}
+		return login;
+	}
+	
+	public void loadGuestPreferencesByLogin(String login) {		
+		this.loadedGuestPreferences = guestPreferencesController.findByLogin(login);
+	    setLayout(loadedGuestPreferences.getLayout());
+	    setMenuMode(loadedGuestPreferences.getMenuMode());
+	    setDarkMenu(loadedGuestPreferences.getDarkMenu());
+	    setDarkTheme(loadedGuestPreferences.getDarkTheme());
+	    setLogoBlack(loadedGuestPreferences.isLogoBlack());
+	    setTheme(loadedGuestPreferences.getTheme());
+	    setInputStyle(loadedGuestPreferences.getInputStyle());
+	    this.user = loadedGuestPreferences.getUser();
+	    this.id = loadedGuestPreferences.getId();		
 	}
 	
 }
