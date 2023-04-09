@@ -1,3 +1,4 @@
 paradise\BcryptEncodePassword.class
 paradise\Email.class
+paradise\GenerateRandomPassword.class
 paradise\DatabaseConnection.class

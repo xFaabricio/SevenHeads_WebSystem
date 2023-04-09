@@ -13,16 +13,19 @@ import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.mail.MessagingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.primefaces.paradise.controller.RoleController;
 import org.primefaces.paradise.controller.UserController;
 import org.primefaces.paradise.entity.Role;
 import org.primefaces.paradise.entity.User;
 import org.primefaces.paradise.service.EmailService;
+import org.primefaces.paradise.service.SmsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Named
@@ -36,6 +39,10 @@ public class LoginBean implements Serializable {
 	private String password;
 	
 	private String email;
+	
+	private String usernameRecovery;
+	
+	private String usernameSMS;
 	
 	@Inject
 	UserController userController;
@@ -65,6 +72,117 @@ public class LoginBean implements Serializable {
 	public String redirectSignIn() {		
 		return "login.xhtml?faces-redirect=true";
 	}	
+	
+	public String redirectForgotPassword() {
+		return "forgotPassword.xhtml?faces-redirect=true";
+	}
+	
+	public String generateNewPassword() {
+		String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789~!@#$%&*()-_=+[{]}\'\"<.>/?";		
+		return RandomStringUtils.random( 8, characters );
+	}
+	
+	public User recoveryProcessEmail(User user) {
+		return recoveryProcess(user, true, false);
+	}
+	
+	public User recoveryProcessSMS(User user) {
+		return recoveryProcess(user, false, true);
+	}
+	
+	public User recoveryProcess(User user, boolean email, boolean sms) {
+		user.setChangePassword(true);		
+		BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
+		String newPassword = generateNewPassword();
+		user.setPassword(bcrypt.encode(newPassword));
+		
+		user = userController.update(user);
+		
+		if(email) {
+			EmailService emailService = new EmailService();
+			try {
+				emailService.sendEmailForgot(user.getEmail(), user.getLogin(), newPassword);
+			} catch (MessagingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		if(sms) {
+			SmsService smsService = new SmsService();
+			smsService.sendSms(user.getPhoneNumber(), templateSms(user.getLogin(),newPassword));
+		}
+		
+		FacesMessage msg = new FacesMessage("Request sent","Your account recovery request has been sent.");
+        msg.setSeverity(FacesMessage.SEVERITY_INFO);        
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+        
+		return user;
+	}
+	
+	public String templateSms(String login, String newPassword) {		
+		return "Your login is " + login + " and your new password is "+ newPassword +" . Log in and change your password immediately. If in doubt, please contact us.";
+	}
+	
+	public void recoveryByEmail() {
+		if(this.email != null && !this.email.equals("") ) {
+			User user = userController.findByEmail(this.email);
+			
+			if(user == null) {			
+				FacesMessage msg = new FacesMessage("User not found","We couldn't find a record with that email, create an account.");
+		        msg.setSeverity(FacesMessage.SEVERITY_INFO);
+		        FacesContext.getCurrentInstance().addMessage(null, msg);
+		        return;
+			}
+			
+			user = recoveryProcessEmail(user);
+		} else {
+			FacesMessage msg = new FacesMessage("E-mail Required","Fill in the email field.");
+	        msg.setSeverity(FacesMessage.SEVERITY_INFO);
+	        FacesContext.getCurrentInstance().addMessage(null, msg);
+	        return;
+		}
+	}
+	
+	public void recoveryByUsername() {
+		if(this.usernameRecovery != null && !this.usernameRecovery.equals("") ) {
+			User user = userController.findByLogin(this.usernameRecovery);
+			
+			if(user == null) {			
+				FacesMessage msg = new FacesMessage("User not found","We couldn't find a record with that username, create an account.");
+		        msg.setSeverity(FacesMessage.SEVERITY_INFO);
+		        FacesContext.getCurrentInstance().addMessage(null, msg);
+		        return;
+			}
+			
+			user = recoveryProcessEmail(user);
+		} else {
+			FacesMessage msg = new FacesMessage("Username Required","Fill in the username field.");
+	        msg.setSeverity(FacesMessage.SEVERITY_INFO);
+	        FacesContext.getCurrentInstance().addMessage(null, msg);
+	        return;
+		}
+	}
+
+	public void recoveryBySMS() {
+		if(this.usernameSMS != null && !this.usernameSMS.equals("") ) {
+			User user = userController.findByLogin(this.usernameSMS);
+			
+			if(user == null) {			
+				FacesMessage msg = new FacesMessage("User not found","We couldn't find a record with that username, create an account.");
+		        msg.setSeverity(FacesMessage.SEVERITY_INFO);
+		        FacesContext.getCurrentInstance().addMessage(null, msg);
+		        return;
+			}
+			
+			user = recoveryProcessSMS(user);
+		} else {
+			FacesMessage msg = new FacesMessage("Username Required","Fill in the username field.");
+	        msg.setSeverity(FacesMessage.SEVERITY_INFO);
+	        FacesContext.getCurrentInstance().addMessage(null, msg);
+	        return;
+		}
+	}
 	
 	public void verifyUsername(FacesContext facesContext, UIComponent component, String value) {				
 		if(value != null) {		
@@ -181,6 +299,22 @@ public class LoginBean implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getUsernameRecovery() {
+		return usernameRecovery;
+	}
+
+	public void setUsernameRecovery(String usernameRecovery) {
+		this.usernameRecovery = usernameRecovery;
+	}
+
+	public String getUsernameSMS() {
+		return usernameSMS;
+	}
+
+	public void setUsernameSMS(String usernameSMS) {
+		this.usernameSMS = usernameSMS;
 	}
 	
 }

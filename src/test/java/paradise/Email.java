@@ -10,7 +10,8 @@ public class Email {
 		EmailService emailService = new EmailService();
 
 		try {
-			emailService.sendEmailWelcome("fabricio_oliveira1@hotmail.com", "Fabrício", true);
+//			emailService.sendEmailWelcomeDebug("fabricio_oliveira1@hotmail.com", "Fabrício");
+			emailService.sendEmailForgotDebug("fabricio.oliveira77@gmail.com", "xFaabricio", "test");
 		} catch (MessagingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

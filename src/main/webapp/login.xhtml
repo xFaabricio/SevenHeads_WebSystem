@@ -41,8 +41,8 @@
                                         styleClass="lock-icon"/>
                     </div>
                 </div>
-                <div class="col-12 chkbox-container">
-                    <a href="">Forgot password?</a>
+                <div class="col-12 chkbox-container">                    
+                    <p:commandLink id="forgotPassword" action="#{loginBean.redirectForgotPassword}">Forgot password?</p:commandLink>
                 </div>
                 <div class="col-12 button-container">
                     <p:commandButton id="signIn" value="Sign In" styleClass="ui-button-info ui-button-raised" action="#{loginBean.submit}" ajax="false"/>
