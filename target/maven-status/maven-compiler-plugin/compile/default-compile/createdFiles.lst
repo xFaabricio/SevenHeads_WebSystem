@@ -57,6 +57,7 @@ org\primefaces\paradise\view\CalendarDemoView.class
 org\primefaces\paradise\service\OrderService.class
 org\primefaces\paradise\component\ParadiseMenu.class
 org\primefaces\paradise\controller\GuestPreferencesController.class
+org\primefaces\paradise\view\UsersView.class
 org\primefaces\paradise\domain\Country.class
 org\primefaces\paradise\view\GuestPreferences$SpecialLayout.class
 org\primefaces\paradise\blockviewer\BlockViewer.class

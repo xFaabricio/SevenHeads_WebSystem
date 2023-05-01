@@ -28,11 +28,12 @@
 	<sec:http auto-config="false" use-expressions="true" >
 		<sec:csrf disabled="true"/>
 		<sec:intercept-url pattern="/dashboard.xhtml*" access="hasRole('ROLE_USER')" />
-		<sec:intercept-url pattern="/crud.xhtml*" access="hasRole('ROLE_USER')" />		
+		<sec:intercept-url pattern="/crud.xhtml*" access="hasRole('ROLE_USER')" />
+		<sec:intercept-url pattern="/api.xhtml*" access="hasRole('ROLE_ADMIN')" />
+		<sec:intercept-url pattern="/users.xhtml*" access="hasRole('ROLE_ADMIN')" />		
 		<sec:intercept-url pattern="/error.xhtml*" access="isAuthenticated()" />
 		<sec:intercept-url pattern="/forgotPassword.xhtml*" access="permitAll" />
-		<sec:intercept-url pattern="/notfound.xhtml*" access="isAuthenticated()" />
-		<sec:intercept-url pattern="/error.xhtml*" access="isAuthenticated()" />
+		<sec:intercept-url pattern="/notfound.xhtml*" access="isAuthenticated()" />		
 		<sec:intercept-url pattern="/access.xhtml*" access="isAuthenticated()" />
 		<sec:intercept-url pattern="/login.xhtml*" access="permitAll"/>
 		<sec:intercept-url pattern="/signUp.xhtml*" access="permitAll"/>

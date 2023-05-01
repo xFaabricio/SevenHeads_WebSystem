@@ -25,6 +25,7 @@ C:\git\paradise\src\main\java\org\primefaces\paradise\controller\UserController.
 C:\git\paradise\src\main\java\org\primefaces\paradise\jpa\EntityFactory.java
 C:\git\paradise\src\main\java\org\primefaces\paradise\controller\GuestPreferencesController.java
 C:\git\paradise\src\main\java\org\primefaces\paradise\service\DocumentService.java
+C:\git\paradise\src\main\java\org\primefaces\paradise\view\UsersView.java
 C:\git\paradise\src\main\java\org\primefaces\paradise\view\MessageDemoView.java
 C:\git\paradise\src\main\java\org\primefaces\paradise\view\TreeDemoView.java
 C:\git\paradise\src\main\java\org\primefaces\paradise\bean\LoginBean.java

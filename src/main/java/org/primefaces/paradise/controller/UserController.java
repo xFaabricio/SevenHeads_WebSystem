@@ -1,6 +1,7 @@
 package org.primefaces.paradise.controller;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -22,6 +23,19 @@ public class UserController extends GenericDAO<User> implements UserRepository, 
 
 	@Inject
 	GuestPreferencesController guestController;
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<User> findAllActive(){
+		EntityManager entityManager = EntityFactory.getEntityManager();
+		Query query = entityManager.createQuery("SELECT user FROM User user WHERE user.active = :active");
+		query.setParameter("active", true);		
+		try {
+			return query.getResultList();
+		} catch (Exception e) {
+			return null;
+		}
+	}
 	
 	@Override
 	public User findByLogin(String login) {

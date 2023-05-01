@@ -66,6 +66,10 @@ public class ApplicationUserDetailsService implements UserDetailsService {
 			userEnable = false;
 		}
 		
+		if(user.getActive() == null || !user.getActive()) {
+			userEnable = false;
+		}
+		
 		return new UserSystem(user, userEnable, true, true, true, getRoles(user));
 	}
 		

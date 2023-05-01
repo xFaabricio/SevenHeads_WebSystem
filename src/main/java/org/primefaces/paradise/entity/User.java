@@ -3,6 +3,7 @@ package org.primefaces.paradise.entity;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -64,6 +65,9 @@ public class User implements Serializable {
 	private Boolean changePassword;
 	
 	private Boolean verified;
+	
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private UUID idApi;
 	
 	@ManyToMany(cascade = CascadeType.MERGE)
 	@JoinTable(name = "sh_user_roles",
@@ -303,6 +307,14 @@ public class User implements Serializable {
 
 	public void setCodeRecoveryPassword(String codeRecoveryPassword) {
 		this.codeRecoveryPassword = codeRecoveryPassword;
+	}
+
+	public UUID getIdApi() {
+		return idApi;
+	}
+
+	public void setIdApi(UUID idApi) {
+		this.idApi = idApi;
 	}			
 	
 }

@@ -132,6 +132,7 @@ public class GuestPreferences implements Serializable {
     public void setLayout(String layout) {    	        
         if(!layout.equals(this.loadedGuestPreferences.getLayout())) {        	
 	        this.loadedGuestPreferences = this;
+	        this.layout = layout;
 	        guestPreferencesController.update(this.loadedGuestPreferences);
         }
         this.layout = layout;
