@@ -66,6 +66,8 @@ public class User implements Serializable {
 	
 	private Boolean verified;
 	
+	private Boolean agreeTerms;
+	
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private UUID idApi;
 	
@@ -94,8 +96,9 @@ public class User implements Serializable {
 
 	public User(Long id, String name, String login, String password, String email, Date lastLogin, Date createDate,
 			Date updateDate, Date inactiveDate, Date blockedDate, Boolean active, Boolean blocked, Integer tryQuantity,
-			String countryCode, String phoneNumber, Boolean firstLogin, Boolean changePassword, Boolean verified,
-			List<Role> roles, User updateUser, GuestPreferences guestPreferences, byte[] userPhoto) {
+			String countryCode, String phoneNumber, String codeRecoveryPassword, Boolean firstLogin,
+			Boolean changePassword, Boolean verified, Boolean agreeTerms, UUID idApi, List<Role> roles, User updateUser,
+			GuestPreferences guestPreferences, byte[] userPhoto) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -112,9 +115,12 @@ public class User implements Serializable {
 		this.tryQuantity = tryQuantity;
 		this.countryCode = countryCode;
 		this.phoneNumber = phoneNumber;
+		this.codeRecoveryPassword = codeRecoveryPassword;
 		this.firstLogin = firstLogin;
 		this.changePassword = changePassword;
 		this.verified = verified;
+		this.agreeTerms = agreeTerms;
+		this.idApi = idApi;
 		this.roles = roles;
 		this.updateUser = updateUser;
 		this.guestPreferences = guestPreferences;
@@ -315,6 +321,14 @@ public class User implements Serializable {
 
 	public void setIdApi(UUID idApi) {
 		this.idApi = idApi;
-	}			
+	}
+
+	public Boolean getAgreeTerms() {
+		return agreeTerms;
+	}
+
+	public void setAgreeTerms(Boolean agreeTerms) {
+		this.agreeTerms = agreeTerms;
+	}	
 	
 }

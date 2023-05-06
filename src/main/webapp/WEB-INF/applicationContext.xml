@@ -20,6 +20,10 @@
 	
 	<bean id="applicationUserDetailsService" class="org.primefaces.paradise.security.ApplicationUserDetailsService"/>
 	
+	<bean id="authenticationSuccessHandlerManagerImpl" class="org.primefaces.paradise.security.AuthenticationSuccessHandlerManagerImpl"/>
+	
+	<bean id="authenticationFailureHandlerManagerImpl" class="org.primefaces.paradise.security.AuthenticationFailureHandlerManagerImpl"/>
+	
 	<bean id="bcrypt" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 	
 	<sec:http pattern="/images/**" security="none"/>	
@@ -41,7 +45,10 @@
 		<sec:intercept-url pattern="/**" access="denyAll" />
 		
 		<sec:form-login login-page="/login.xhtml" default-target-url="/dashboard.xhtml"  
-			always-use-default-target="true"/>
+			always-use-default-target="true"
+			authentication-success-handler-ref="authenticationSuccessHandlerManagerImpl"
+			authentication-failure-handler-ref="authenticationFailureHandlerManagerImpl"
+			authentication-failure-url="/login.xhtml?error=loginError"/>			
 		<sec:logout logout-url="/logout" invalidate-session="true"/>						
 	</sec:http>
 	

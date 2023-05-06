@@ -14,6 +14,7 @@ C:\git\paradise\src\main\java\org\primefaces\paradise\domain\Country.java
 C:\git\paradise\src\main\java\org\primefaces\paradise\entity\User.java
 C:\git\paradise\src\main\java\org\primefaces\paradise\domain\Representative.java
 C:\git\paradise\src\main\java\org\primefaces\paradise\repository\UserRepository.java
+C:\git\paradise\src\main\java\org\primefaces\paradise\security\AuthenticationSuccessHandlerManagerImpl.java
 C:\git\paradise\src\main\java\org\primefaces\paradise\view\FreeBlocksDemoView.java
 C:\git\paradise\src\main\java\org\primefaces\paradise\service\OrderService.java
 C:\git\paradise\src\main\java\org\primefaces\paradise\view\DataTableDemoView.java
@@ -23,6 +24,7 @@ C:\git\paradise\src\main\java\org\primefaces\paradise\domain\Order.java
 C:\git\paradise\src\main\java\org\primefaces\paradise\util\SpringUtils.java
 C:\git\paradise\src\main\java\org\primefaces\paradise\controller\UserController.java
 C:\git\paradise\src\main\java\org\primefaces\paradise\jpa\EntityFactory.java
+C:\git\paradise\src\main\java\org\primefaces\paradise\security\AuthenticationFailureHandlerManagerImpl.java
 C:\git\paradise\src\main\java\org\primefaces\paradise\controller\GuestPreferencesController.java
 C:\git\paradise\src\main\java\org\primefaces\paradise\service\DocumentService.java
 C:\git\paradise\src\main\java\org\primefaces\paradise\view\UsersView.java

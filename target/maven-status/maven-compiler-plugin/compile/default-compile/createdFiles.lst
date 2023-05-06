@@ -1,6 +1,8 @@
+org\primefaces\paradise\security\AuthenticationSuccessHandlerManagerImpl.class
 org\primefaces\paradise\view\ChartDemoView.class
 org\primefaces\paradise\component\ParadiseMenu$PropertyKeys.class
 org\primefaces\paradise\security\UserSystem.class
+org\primefaces\paradise\security\AuthenticationFailureHandlerManagerImpl.class
 org\primefaces\paradise\view\MediaDemoView.class
 org\primefaces\paradise\view\CrudDemoView.class
 org\primefaces\paradise\domain\InventoryStatus.class

@@ -10,13 +10,18 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
-        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>        
     </f:facet>
     <title>PrimeFaces Paradise</title>
 </h:head>
 
 <h:body styleClass="login-body">
-    <h:form id="form-login" prepandId="false">
+	<p:growl id="growl" showDetail="true" widgetVar="growlMsg" />
+	<h:outputScript name="js/login.js" library="paradise-layout"/>
+	
+    <h:form id="form-login" prepandId="false">    	
+    	
+    	
         <div class="login-panel ui-fluid">
             <div class="grid grid-nogutter">
                 <div class="col-12 logo-container">

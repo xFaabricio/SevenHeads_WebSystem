@@ -60,17 +60,8 @@ public class ApplicationUserDetailsService implements UserDetailsService {
 		
 		setUserLogin(user.getLogin());
 		
-		Boolean userEnable = true;
-		
-		if(user.getBlocked() != null && user.getBlocked()) {
-			userEnable = false;
-		}
-		
-		if(user.getActive() == null || !user.getActive()) {
-			userEnable = false;
-		}
-		
-		return new UserSystem(user, userEnable, true, true, true, getRoles(user));
+		//Second Parameter is if user is enabled but spring security will redirect correctly with AuthenticationSuccessHandlerManagerImpl		
+		return new UserSystem(user, true, true, true, true, getRoles(user));
 	}
 		
 	private Collection<? extends GrantedAuthority> getRoles(User user){
