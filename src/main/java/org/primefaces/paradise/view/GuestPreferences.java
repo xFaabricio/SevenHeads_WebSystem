@@ -57,7 +57,7 @@ public class GuestPreferences implements Serializable {
 
     private boolean darkTheme = false;
     
-    private boolean logoBlack = true;
+    private Boolean logoBlack;
     
     private String theme = "blue";
 
@@ -200,8 +200,22 @@ public class GuestPreferences implements Serializable {
 		this.darkTheme = darkTheme;
 	}
 	
-	public boolean isLogoBlack() {
-		return logoBlack;
+	public Boolean getLogoBlack() {
+		String login = UserDetailsUtil.getLoggedUser().getUsername();
+		if(this.logoBlack == null) {
+			this.loadedGuestPreferences = guestPreferencesController.findByLogin(login);
+			this.logoBlack = this.loadedGuestPreferences.getLogoBlack() != null ? this.loadedGuestPreferences.getLogoBlack() : true;
+		}
+		return this.logoBlack;
+	}
+	
+	public Boolean isLogoBlack() {
+		if(this.logoBlack == null) {
+			String login = UserDetailsUtil.getLoggedUser().getUsername();
+			this.loadedGuestPreferences = guestPreferencesController.findByLogin(login);
+			this.logoBlack = this.loadedGuestPreferences.getLogoBlack() != null ? this.loadedGuestPreferences.getLogoBlack() : true;
+		}
+		return this.logoBlack;
 	}
 
 	public void setLogoBlack(boolean logoBlack) {		
