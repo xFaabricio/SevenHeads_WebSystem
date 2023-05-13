@@ -10,11 +10,11 @@ $(document).ready(function() {
   	}
 	
 	// Define a mensagem de acordo com o valor do parâmetro 'error'
-	var errorMessage = 'User';;
-	if (errorParam === 'blockedUser') {
-		detail = 'Blocked user!';
-	} else if (errorParam === 'deletedUser') {
+	var errorMessage = 'User';
+	if (errorParam === 'deletedUser') {
 		detail = 'Deleted User!';
+	} else if (errorParam === 'blockedUser') {
+		detail = 'Blocked user!';
 	} else if(errorParam === 'loginError'){
 		detail = 'Username or password is invalid !';
 	}

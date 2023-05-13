@@ -4,7 +4,8 @@
         xmlns:h="http://java.sun.com/jsf/html"
         xmlns:ui="http://java.sun.com/jsf/facelets"
         xmlns:p="http://primefaces.org/ui"
-        xmlns:pv="http://primefaces.org/paradise">
+        xmlns:pv="http://primefaces.org/paradise"
+        xmlns:sec="http://www.springframweork.org/security/tags">
 
     <div class="layout-menu-wrapper #{guestPreferences.darkMenuValue() ? 'layout-menu-dark' : null}">
         <div class="layout-menu-container">
@@ -20,11 +21,11 @@
                     <p:submenu id="m_api" label="Api" icon="pi pi-cloud">
                         <p:menuitem id="m_api_item" value="Api" icon="pi pi-cloud" outcome="/api"/>
                     </p:submenu>                    
-                    <p:submenu id="m_admin_config" label="Admin" icon="pi pi-cog">
+                    <p:submenu id="m_admin_config" label="Admin" icon="pi pi-cog" rendered="#{authorization.isAdmin()}">
                     	<p:submenu id="m_admin" icon="pi pi-cog" label="Manage">
                     		<p:menuitem id="m_admin_users" icon="fa fa-user" value="Users" outcome="/users"/>
                     	</p:submenu>
-                    </p:submenu>
+                    </p:submenu>                    
                     <p:submenu id="logout" label="Logout" icon="pi pi-power-off">
                     	<p:menuitem id="logout-item" value="Logout" icon="pi pi-power-off" url="/logout"/>
                     </p:submenu>
