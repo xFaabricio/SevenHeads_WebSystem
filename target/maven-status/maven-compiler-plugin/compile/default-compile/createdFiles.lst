@@ -49,6 +49,7 @@ org\primefaces\paradise\view\PrimeIconsView$Icon.class
 org\primefaces\paradise\view\TreeDemoView.class
 org\primefaces\paradise\view\GuestPreferences$ComponentTheme.class
 org\primefaces\paradise\service\EmailService.class
+org\primefaces\paradise\security\Authorization.class
 org\primefaces\paradise\service\ProductService.class
 org\primefaces\paradise\service\SmsService.class
 org\primefaces\paradise\view\DashboardView.class
