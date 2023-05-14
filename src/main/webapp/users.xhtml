@@ -14,7 +14,7 @@
                     <div class="card">
                         <p:growl id="messages" showDetail="true" />
 
-                        <p:toolbar styleClass="mb-4">
+                        <p:toolbar id="crud-userToolbar" styleClass="mb-4">
                             <p:toolbarGroup>
                                 <p:commandButton id="delete-users-button" value="#{usersView.deleteButtonMessage}" icon="pi pi-trash" actionListener="#{usersView.deleteSelectedUsers}"
                                     styleClass="ui-button-danger" disabled="#{!usersView.hasSelectedUsers()}" update="@this">

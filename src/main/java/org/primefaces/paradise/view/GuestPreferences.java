@@ -57,7 +57,7 @@ public class GuestPreferences implements Serializable {
 
     private boolean darkTheme = false;
     
-    private Boolean logoBlack;
+    private Boolean logoBlack = false;
     
     private String theme = "blue";
 
@@ -86,7 +86,8 @@ public class GuestPreferences implements Serializable {
     private GuestPreferences loadedGuestPreferences;
     
     @Transient
-    private boolean calledFirstTime = false; 
+    private boolean calledFirstTime = false;
+    
     @PostConstruct
     public void init() {
         componentThemes = new ArrayList<>();
@@ -191,13 +192,9 @@ public class GuestPreferences implements Serializable {
     public boolean getDarkTheme() {
     	return darkTheme;
     }
-
-	public void setDarkTheme(boolean darkTheme) {		
-		if(darkTheme != this.loadedGuestPreferences.getDarkTheme()) {			
-			this.loadedGuestPreferences = this;
-			guestPreferencesController.update(this.loadedGuestPreferences);
-		}
-		this.darkTheme = darkTheme;
+    
+	public void setDarkTheme(boolean darkTheme) {
+		this.darkTheme = darkTheme;					
 	}
 	
 	public Boolean getLogoBlack() {
@@ -207,8 +204,8 @@ public class GuestPreferences implements Serializable {
 			this.logoBlack = this.loadedGuestPreferences.getLogoBlack() != null ? this.loadedGuestPreferences.getLogoBlack() : true;
 		}
 		return this.logoBlack;
-	}
-	
+	}	
+
 	public Boolean isLogoBlack() {
 		if(this.logoBlack == null) {
 			String login = UserDetailsUtil.getLoggedUser().getUsername();
@@ -218,7 +215,7 @@ public class GuestPreferences implements Serializable {
 		return this.logoBlack;
 	}
 
-	public void setLogoBlack(boolean logoBlack) {		
+	public void setLogoBlack(Boolean logoBlack) {		
 		if(logoBlack != this.loadedGuestPreferences.isLogoBlack()) {			
 			this.loadedGuestPreferences = this;
 			guestPreferencesController.update(this.loadedGuestPreferences);
@@ -361,6 +358,11 @@ public class GuestPreferences implements Serializable {
     	if(isSpecial && updateTopbarId) {
 	    	facesContext.getPartialViewContext().getRenderIds().add("topbar");
 	    	facesContext.getPartialViewContext().getRenderIds().add("config-form");
+    	}
+    	
+    	if(this.darkTheme != this.loadedGuestPreferences.getDarkTheme()) {
+    		this.loadedGuestPreferences.setDarkTheme(this.darkTheme);
+    		guestPreferencesController.update(this.loadedGuestPreferences);
     	}
     }
     

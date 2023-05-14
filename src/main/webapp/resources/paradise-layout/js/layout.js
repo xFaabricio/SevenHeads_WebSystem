@@ -430,7 +430,10 @@ PrimeFaces.ParadiseConfigurator = {
     
     changeMenuToDarkTheme: function() {
         $('.layout-content').toggleClass('layout-theme-dark');
-        $('.card').toggleClass('layout-theme-dark-card');                       
+        $('.card').toggleClass('layout-theme-dark-card');
+        $('.mb-4').toggleClass('layout-theme-dark-card');
+        $('.ui-datatable-header').toggleClass('layout-theme-dark-card');
+        $('[id$=globalFilter]').toggleClass('layout-theme-dark-card');
         $('.layout-footer').toggleClass('layout-theme-dark-footer');
         
         $('.ui-paginator').toggleClass('layout-theme-dark-card');
@@ -440,10 +443,15 @@ PrimeFaces.ParadiseConfigurator = {
         $('td').toggleClass('layout-theme-dark-card');
         $('th').toggleClass('layout-theme-dark-card');
         $('body .ui-selectonemenu').toggleClass('layout-theme-dark-table-th');
-				
+
 		$('#topbar-menu > li a').toggleClass('layout-theme-dark-card');
 		$('.payments > ul > li').toggleClass('layout-theme-dark-ul-li');
 		$('.tasks > ul > li').toggleClass('layout-theme-dark-ul-li');
+
+		var styles = `.ui-state-hover { color: red !important}`
+		var styleSheet = document.createElement("style")
+		styleSheet.innerText = styles
+		document.head.appendChild(styleSheet);
 		
         this.clearLayoutState();
     },

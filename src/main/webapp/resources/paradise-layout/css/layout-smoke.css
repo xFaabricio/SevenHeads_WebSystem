@@ -2766,9 +2766,13 @@ body a {
 	border: 1px solid rgb(255 255 255 / 8%) !important;
     border-width: 0 0 1px 0 !important;
 }
+.ui-state-hover-red{
+	color: #d51616 !important;
+}
 .layout-theme-dark-table-th {
 	border: 1px solid rgb(255 255 255 / 55%) !important;
     border-width: 0 0 1px 0 !important;
+    background-color: #403f3f !important;
 }
 .layout-theme-dark-ul-li {
 	border: 1px solid rgb(255 255 255 / 8%) !important;

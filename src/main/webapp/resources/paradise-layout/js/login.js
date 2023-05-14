@@ -14,7 +14,7 @@ $(document).ready(function() {
 	if (errorParam === 'deletedUser') {
 		detail = 'Deleted User!';
 	} else if (errorParam === 'blockedUser') {
-		detail = 'Blocked user!';
+		detail = 'Blocked user ! Use the forgot password to unlock.';
 	} else if(errorParam === 'loginError'){
 		detail = 'Username or password is invalid !';
 	}
