@@ -199,7 +199,7 @@ public class GuestPreferences implements Serializable {
 	
 	public Boolean getLogoBlack() {
 		String login = UserDetailsUtil.getLoggedUser().getUsername();
-		if(this.logoBlack == null) {
+		if(guestPreferencesController != null) {
 			this.loadedGuestPreferences = guestPreferencesController.findByLogin(login);
 			this.logoBlack = this.loadedGuestPreferences.getLogoBlack() != null ? this.loadedGuestPreferences.getLogoBlack() : true;
 		}
