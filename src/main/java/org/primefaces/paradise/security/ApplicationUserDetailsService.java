@@ -48,7 +48,8 @@ public class ApplicationUserDetailsService implements UserDetailsService {
 			userPreferences.setLayout("default");
 			userPreferences.setMenuMode("layout-menu-slim");
 			userPreferences.setDarkMenu(true);
-			userPreferences.setDarkTheme(false);			
+			userPreferences.setDarkTheme(false);
+			userPreferences.setLogoBlack(true);
 			userPreferences.setTheme("blue");
 			userPreferences.setInputStyle("outlined");
 			userPreferences.setUser(user);

@@ -329,6 +329,6 @@ public class User implements Serializable {
 
 	public void setAgreeTerms(Boolean agreeTerms) {
 		this.agreeTerms = agreeTerms;
-	}	
+	}
 	
 }

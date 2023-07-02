@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <f:facet name="first">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>        
+    </f:facet>
+    <title>PrimeFaces Paradise</title>
+</h:head>
+
+<h:body styleClass="login-body">
+	<p:growl id="growl" showDetail="true" widgetVar="growlMsg" />
+	<h:outputScript name="js/login.js" library="paradise-layout"/>
+	
+    <h:form id="form-login" prepandId="false">    	
+    	
+    	
+        <div class="login-panel ui-fluid">
+            <div class="grid grid-nogutter">
+                <div class="col-12 logo-container">
+                    <p:graphicImage name="images/logo-gray.png" library="paradise-layout" styleClass="logo"/>
+                    <p:graphicImage name="images/login/icon-login.png" library="paradise-layout"
+                                    styleClass="login-icon"/>
+                    <h2>Welcome to Paradise</h2>
+                </div>
+                <div class="col-12">
+                    <p:outputLabel for="username" value="Username"/>
+                    <div class="input-wrapper">
+                        <p:inputText id="username" name="username" placeholder="Username" value="#{loginBean.username}"/>
+                        <p:graphicImage name="images/login/user.png" library="paradise-layout"
+                                        styleClass="user-icon"/>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <p:outputLabel for="password" value="Password"/>
+                    <div class="input-wrapper">
+                        <p:password id="password" name="password" placeholder="Password" feedback="false" value="#{loginBean.password}"/>
+                        <p:graphicImage name="images/login/lock.png" library="paradise-layout"
+                                        styleClass="lock-icon"/>
+                    </div>
+                </div>
+                <div class="col-12 chkbox-container">                    
+                    <p:commandLink id="forgotPassword" action="#{loginBean.redirectForgotPassword}">Forgot password?</p:commandLink>
+                </div>
+                <div class="col-12 button-container">
+                    <p:commandButton id="signIn" value="Sign In" styleClass="ui-button-info ui-button-raised" action="#{loginBean.submit}" ajax="false"/>
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                    <p:separator style="padding: 0.5rem !important;width: 100%;"/>
+                    <p:commandButton id="signUp" value="Sign up" styleClass="ui-button-success ui-button-raised" action="#{loginBean.redirectSignUp}"/>                    
+                </div>                
+            </div>
+        </div>
+    </h:form>
+    
+    
+    
+</h:body>
+<h:outputStylesheet name="css/primeicons.css" library="paradise-layout"/>
+<h:outputStylesheet name="css/primeflex.min.css" library="paradise-layout"/>
+<h:outputStylesheet name="css/layout-#{guestPreferences.layout}.css" library="paradise-layout"/>
+
+</html>
