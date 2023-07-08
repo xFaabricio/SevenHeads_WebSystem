@@ -8,9 +8,9 @@
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" /> <!-- DB Driver -->
-            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://raja.db.elephantsql.com:5432/brhakqqv" /> <!-- BD Mane -->
-            <property name="javax.persistence.jdbc.user" value="brhakqqv" /> <!-- DB User -->
-            <property name="javax.persistence.jdbc.password" value="8H1YbqhjtD2ptH0ibzti3iwYdhCvW-KO" /> <!-- DB Password -->
+            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://ec2-54-208-11-146.compute-1.amazonaws.com:5432/d1an1mufgnopsb" /> <!-- BD Mane -->
+            <property name="javax.persistence.jdbc.user" value="zsjvurndymrzuc" /> <!-- DB User -->
+            <property name="javax.persistence.jdbc.password" value="569f1086727a08a14efc15dd747c5c479d3f6e7705e3f71a252d02f7eb8ced13" /> <!-- DB Password -->
 
 	    	<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/> <!-- DB Dialect -->
             <property name="hibernate.hbm2ddl.auto" value="update" /> <!-- create / create-drop / update -->

@@ -37,7 +37,7 @@ public class AuthenticationFailureHandlerManagerImpl implements AuthenticationFa
 			}			
 		}
 		
-		if(user != null && (user.getBlocked() != null && !user.getBlocked())) {
+		if(user != null && (user.getBlocked() != null && user.getBlocked())) {
 			response.sendRedirect(request.getContextPath() + "/login.xhtml?error=blockedUser");
 		}
 		

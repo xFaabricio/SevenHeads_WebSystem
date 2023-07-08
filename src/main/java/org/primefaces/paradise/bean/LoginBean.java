@@ -96,6 +96,7 @@ public class LoginBean implements Serializable {
 		String newPassword = generateNewPassword();
 		user.setPassword(bcrypt.encode(newPassword));
 		user.setBlocked(false);
+		user.setTryQuantity(0);
 		user = userController.update(user);
 		
 		if(email) {
