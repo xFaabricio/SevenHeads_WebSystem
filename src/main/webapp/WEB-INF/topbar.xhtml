@@ -9,7 +9,7 @@
 	<p:panel id="topbar">
 	    <div class="topbar">
 	        <div class="topbar-wrapper">
-	        	<p:panel id="topbar-logo" style="backgrund: #ffffff00 !important; border: 0px !important">
+	        	<p:outputPanel id="topbar-logo">
 		            <div class="topbar-left">
 		                <h:link id="logolink" outcome="/dashboard" styleClass="topbar-logo">
 		                    <!--  <p:graphicImage name="images/#{guestPreferences.layout == 'default' ? 'logo-black.png' : 'logo-white.png'}" style="border: 0px;" library="paradise-layout" /> -->
@@ -24,7 +24,7 @@
 		                <p:inputText type="text" styleClass="topbar-search" placeholder="Type your search here" id="topbar-search" />
 		               
 		            </div>
-	            </p:panel>
+	            </p:outputPanel>
 	            <div class="topbar-right">
 	                <a href="#" id="user-display">
 	                    <span class="username">
