@@ -1,0 +1,147 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+             
+    <ui:define name="title">Users</ui:define>
+
+    <ui:define name="content">
+        <h:form id="form">
+            <div class="grid crud-demo">
+                <div class="col-12">
+                    <div class="card">
+                        <p:growl id="messages" showDetail="true" />
+
+                        <p:toolbar id="crud-userToolbar" styleClass="mb-4">
+                            <p:toolbarGroup>
+                                <p:commandButton id="delete-users-button" value="#{usersView.deleteButtonMessage}" icon="pi pi-trash" actionListener="#{usersView.deleteSelectedUsers}"
+                                    styleClass="ui-button-danger" disabled="#{!usersView.hasSelectedUsers()}" update="@this">
+                                    <p:confirm header="Confirmation" message="Delete the selected users?" icon="pi pi-exclamation-triangle" />
+                                </p:commandButton>
+                            </p:toolbarGroup>
+                            <p:toolbarGroup align="right">                                
+                                <p:commandButton value="Export" icon="pi pi-upload" styleClass="ui-button-help" ajax="false">
+                                    <p:dataExporter type="pdf" target="dt-users" fileName="users"/>
+                                </p:commandButton>
+                            </p:toolbarGroup>
+                        </p:toolbar>
+
+                        <p:dataTable id="dt-users" widgetVar="dtUsers" var="user" value="#{usersView.users}" reflow="true" styleClass="users-table"
+                                    selection="#{usersView.selectedUsers}" rowKey="#{user.id}" paginator="true" rows="10" rowSelectMode="add" paginatorPosition="bottom">
+                            <f:facet name="header">
+                                <div class="users-table-header">
+                                    <span style="font-weight: bold">Manage Users</span>
+                                
+                                    <span class="filter-container ui-input-icon-left">
+                                        <i class="pi pi-search"></i>
+                                        <p:inputText id="globalFilter" onkeyup="PF('dtUsers').filter()" placeholder="Search" />
+                                    </span>
+                                </div>
+                            </f:facet>
+                            
+                            <p:ajax event="rowSelect" update=":form:delete-users-button" />
+                            <p:ajax event="rowUnselect" update=":form:delete-users-button" />
+                            <p:ajax event="rowSelectCheckbox" update=":form:delete-users-button" />
+                            <p:ajax event="rowUnselectCheckbox" update=":form:delete-users-button" />
+                            <p:ajax event="toggleSelect" update=":form:delete-users-button" />
+
+                            <p:column selectionMode="multiple" exportable="false"></p:column>                                                       
+                            <p:column headerText="Name" sortBy="#{user.name}" filterBy="#{user.name}">
+                                <h:outputText value="#{user.name}" />
+                            </p:column>
+                            <p:column headerText="Login" sortBy="#{user.login}" filterBy="#{user.login}">
+                                <h:outputText value="#{user.login}" />
+                            </p:column>
+                            <p:column headerText="Email" sortBy="#{user.email}" filterBy="#{user.email}">
+                                <h:outputText value="#{user.email}" />
+                            </p:column>
+                            <p:column headerText="Phone Number">
+                                <h:outputText value="#{user.phoneNumber}" />
+                            </p:column>
+                            <p:column headerText="Active">
+                                <p:selectBooleanCheckbox value="#{user.active}" disabled="true"/>
+                            </p:column>
+                            <p:column headerText="Blocked">
+                                <p:commandButton icon="pi pi-lock" rendered="#{!user.blocked}" action="#{usersView.block(user)}" update="dt-users"/>
+                                <p:commandButton icon="pi pi-lock-open" rendered="#{user.blocked}" action="#{usersView.unblock(user)}" update="dt-users"/>                                
+                            </p:column>
+                            <p:column headerText="Last Login">
+                                <h:outputText value="#{user.lastLogin}" >
+								    <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+								</h:outputText>
+                            </p:column>                                                      
+                            <p:column exportable="false">
+                                <p:commandButton icon="pi pi-pencil" update=":form:manage-user-content" oncomplete="PF('manageUserDialog').show()" 
+                                    styleClass="edit-button rounded-button ui-button-success" process="@this">
+                                    <f:setPropertyActionListener value="#{user}" target="#{usersView.selectedUser}" />
+                                </p:commandButton>
+                                <p:commandButton class="ui-button-warning rounded-button" icon="pi pi-trash" process="@this" oncomplete="PF('deleteUserDialog').show()" >
+                                    <f:setPropertyActionListener value="#{user}" target="#{usersView.selectedUser}" />
+                                </p:commandButton>
+                            </p:column>
+                        </p:dataTable>
+
+                        <p:dialog header="User Details" showEffect="fade" modal="true" widgetVar="manageUserDialog" responsive="true">
+                        	<p:fileUpload value="" mode="simple" skinSimple="true" style="margin: 5px;" label="Upload new user photo"/>
+                        	<p:graphicImage name="images/avatar5.png" library="paradise-layout" style="border: 0px;margin: 0 auto 2rem auto; display: block;" />                        	                        
+                            <p:outputPanel id="manage-user-content" class="ui-fluid">
+                                <p:outputPanel rendered="#{not empty usersView.selectedUser}">
+                                	<div class="formgrid grid">                                    
+	                                    <div class="field col">
+	                                        <p:outputLabel for="name">Name</p:outputLabel>
+	                                        <p:inputText id="name" value="#{usersView.selectedUser.name}" />
+	                                    </div>
+	                                    <div class="field col">
+	                                        <p:outputLabel for="description">Login</p:outputLabel>
+	                                        <p:inputText id="description" value="#{usersView.selectedUser.login}" required="true"/>
+	                                    </div>
+	                                </div>
+	                                <div class="formgrid grid">
+	                                    <div class="field col">
+	                                        <p:outputLabel for="email">Email</p:outputLabel>
+	                                        <p:inputText id="email" value="#{usersView.selectedUser.email}" required="true"/>
+	                                    </div>
+	                                    <div class="field col">
+	                                        <p:outputLabel for="phoneNumber">Phone Number</p:outputLabel>
+	                                        <p:inputText id="phoneNumber" value="#{usersView.selectedUser.phoneNumber}" />
+	                                    </div>
+                                    </div>
+                                    <p:separator/>
+                                    <div class="formgrid grid">
+	                                    <div class="field col">
+	                                        <p:outputLabel for="password">Password</p:outputLabel>
+	                                        <p:password id="password" value="#{usersView.newPassword}"/>
+	                                    </div>
+	                                    <div class="field col">
+	                                        <p:outputLabel for="passwordConfirmation">Password Confirmation</p:outputLabel>
+	                                        <p:password id="passwordConfirmation" value="#{usersView.newPasswordConfirmation}" />
+	                                    </div>
+                                    </div>
+                                </p:outputPanel>
+                            </p:outputPanel>
+
+                            <f:facet name="footer">
+                                <p:commandButton value="Save" icon="pi pi-check" actionListener="#{usersView.saveUser}" update="manage-user-content" process="manage-user-content @this" />
+                                <p:commandButton value="Cancel" icon="pi pi-times" onclick="PF('manageUserDialog').hide()" class="ui-button-secondary" />
+                            </f:facet>
+                        </p:dialog> 
+
+                        <p:confirmDialog widgetVar="deleteUserDialog" showEffect="fade" width="300" message="Delete the user?" header="Confirm" severity="warn">
+                            <p:commandButton value="Yes" icon="pi pi-check" actionListener="#{usersView.deleteUser}" process="@this" oncomplete="PF('deleteUserDialog').hide()"/>
+                            <p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="pi pi-times" onclick="PF('deleteUserDialog').hide()" />
+                        </p:confirmDialog>
+
+                        <p:confirmDialog global="true" showEffect="fade" width="300">
+                            <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+                            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no ui-button-secondary" icon="pi pi-times" />
+                        </p:confirmDialog>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>

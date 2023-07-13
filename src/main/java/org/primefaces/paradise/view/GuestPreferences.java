@@ -339,14 +339,10 @@ public class GuestPreferences implements Serializable {
 		    	PrimeFaces.current().executeScript("$('.topbar').toggleClass('layout-theme-dark-topbar');");
 		    	PrimeFaces.current().executeScript("$('.topbar-wrapper').toggleClass('layout-theme-dark-topbar');");	    		
 	    	}
-    	}else if(layout.equals("bliss") || layout.equals("cheer") || layout.equals("crimson") 
-    				|| layout.equals("deepsea") || layout.equals("disco") || layout.equals("horizon") 
-    				|| layout.equals("opa") || layout.equals("sunset") || layout.equals("smoke")) { 
+    	}else if(layout.equals("bliss")) { 
     		
-    		if(firstChange && isLogoBlack()) {
-    			setLogoBlack(false);
-    			firstChange = false;
-    		}    		
+			setLogoBlack(false);
+			firstChange = false;
     		
     		PrimeFaces.current().executeScript("$('.topbar').removeClass('layout-theme-dark-topbar');");
 	    	PrimeFaces.current().executeScript("$('.topbar-wrapper').removeClass('layout-theme-dark-topbar');");
