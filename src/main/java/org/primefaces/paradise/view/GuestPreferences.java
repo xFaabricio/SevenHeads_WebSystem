@@ -200,8 +200,8 @@ public class GuestPreferences implements Serializable {
 	public Boolean getLogoBlack() {
 		String login = UserDetailsUtil.getLoggedUser().getUsername();
 		if(guestPreferencesController != null) {
-			this.loadedGuestPreferences = guestPreferencesController.findByLogin(login);
-			this.logoBlack = this.loadedGuestPreferences.getLogoBlack() != null ? this.loadedGuestPreferences.getLogoBlack() : true;
+			this.loadedGuestPreferences = guestPreferencesController.findByLogin(login);			
+			this.logoBlack = this.loadedGuestPreferences.getLogoBlack() != null ? this.loadedGuestPreferences.getLogoBlack() : true;			
 		}
 		return this.logoBlack;
 	}	
@@ -218,6 +218,7 @@ public class GuestPreferences implements Serializable {
 	public void setLogoBlack(Boolean logoBlack) {		
 		if(logoBlack != this.loadedGuestPreferences.isLogoBlack()) {			
 			this.loadedGuestPreferences = this;
+			this.loadedGuestPreferences.logoBlack = logoBlack;
 			guestPreferencesController.update(this.loadedGuestPreferences);
 		}
 		this.logoBlack = logoBlack;
@@ -332,9 +333,7 @@ public class GuestPreferences implements Serializable {
     public void updateTopbar() {
     	
     	FacesContext facesContext = FacesContext.getCurrentInstance();    	
-    	boolean isSpecial = false;    	
-    	boolean updateTopbarId = false;
-    	
+
     	if(layout.equals("default")) {	    		    		    		    	
 	    	if(!logoBlack) {	    		
 		    	PrimeFaces.current().executeScript("$('.topbar').toggleClass('layout-theme-dark-topbar');");
@@ -343,22 +342,18 @@ public class GuestPreferences implements Serializable {
     	}else if(layout.equals("bliss") || layout.equals("cheer") || layout.equals("crimson") 
     				|| layout.equals("deepsea") || layout.equals("disco") || layout.equals("horizon") 
     				|| layout.equals("opa") || layout.equals("sunset") || layout.equals("smoke")) { 
-    		isSpecial = true;
     		
     		if(firstChange && isLogoBlack()) {
     			setLogoBlack(false);
     			firstChange = false;
-    			updateTopbarId = true;
     		}    		
     		
     		PrimeFaces.current().executeScript("$('.topbar').removeClass('layout-theme-dark-topbar');");
 	    	PrimeFaces.current().executeScript("$('.topbar-wrapper').removeClass('layout-theme-dark-topbar');");
     	}
     	
-    	if(isSpecial && updateTopbarId) {
-	    	facesContext.getPartialViewContext().getRenderIds().add("topbar");
-	    	facesContext.getPartialViewContext().getRenderIds().add("config-form");
-    	}
+    	facesContext.getPartialViewContext().getRenderIds().add("topbar-logo");
+    	facesContext.getPartialViewContext().getRenderIds().add("config-form");
     	
     	if(this.darkTheme != this.loadedGuestPreferences.getDarkTheme()) {
     		this.loadedGuestPreferences.setDarkTheme(this.darkTheme);
