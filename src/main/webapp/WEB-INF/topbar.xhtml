@@ -9,7 +9,7 @@
 	<p:panel id="topbar">
 	    <div class="topbar">
 	        <div class="topbar-wrapper">
-	        	<p:outputPanel id="topbar-logo">
+	        	<p:outputPanel id="topbar-logo" style="padding-left: 30px;">
 		            <div class="topbar-left">
 		                <h:link id="logolink" outcome="/dashboard" styleClass="topbar-logo">
 		                    <!--  <p:graphicImage name="images/#{guestPreferences.layout == 'default' ? 'logo-black.png' : 'logo-white.png'}" style="border: 0px;" library="paradise-layout" /> -->
@@ -22,7 +22,6 @@
 		                    <i class="pi pi-search topbar-search-icon"></i>
 		                </label>
 		                <p:inputText type="text" styleClass="topbar-search" placeholder="Type your search here" id="topbar-search" />
-		               
 		            </div>
 	            </p:outputPanel>
 	            <div class="topbar-right">
