@@ -18,6 +18,7 @@ package org.primefaces.paradise.view;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
@@ -87,6 +88,9 @@ public class GuestPreferences implements Serializable {
     
     @Transient
     private boolean calledFirstTime = false;
+    
+    @Transient
+    private String localeSelected = "pt-BR";
     
     @PostConstruct
     public void init() {
@@ -410,6 +414,18 @@ public class GuestPreferences implements Serializable {
 	    setInputStyle(loadedGuestPreferences.getInputStyle());
 	    this.user = loadedGuestPreferences.getUser();
 	    this.id = loadedGuestPreferences.getId();		
+	}
+
+	public String getLocaleSelected() {
+		return localeSelected;
+	}
+
+	public void setLocaleSelected(String localeSelected) {
+		this.localeSelected = localeSelected;
+	}
+	
+	public void updateLocal() {
+		FacesContext.getCurrentInstance().getViewRoot().setLocale(new Locale("en", "US"));
 	}
 	
 }

@@ -21,10 +21,16 @@
 		                <label for="topbar-search">
 		                    <i class="pi pi-search topbar-search-icon"></i>
 		                </label>
-		                <p:inputText type="text" styleClass="topbar-search" placeholder="Type your search here" id="topbar-search" />
+		                <p:inputText type="text" styleClass="topbar-search" placeholder="#{message.typeyoursearchhere}" id="topbar-search" />
 		            </div>
 	            </p:outputPanel>
-	            <div class="topbar-right">
+	            <div class="topbar-right">	            	
+	                <p:selectOneMenu id="option" value="#{guestPreferences.localeSelected}">
+	                	<p:ajax event="change" listener="#{guestPreferences.updateLocal()}" update="topbar-logo"/>	                    
+	                    <f:selectItem itemLabel="Português (Brasil)" itemValue="pt-BR"/>
+	                    <f:selectItem itemLabel="Inglês" itemValue="en-US"/>
+	                    <f:selectItem itemLabel="Espanhol" itemValue="es-ES"/>	                    
+	                </p:selectOneMenu>
 	                <a href="#" id="user-display">
 	                    <span class="username">
 	                    	<p:outputLabel value="#{guestPreferences.login}"></p:outputLabel>
