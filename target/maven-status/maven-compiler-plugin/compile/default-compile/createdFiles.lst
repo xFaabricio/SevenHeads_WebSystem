@@ -8,10 +8,12 @@ org\primefaces\paradise\view\CrudDemoView.class
 org\primefaces\paradise\domain\InventoryStatus.class
 org\primefaces\paradise\service\CustomerService.class
 org\primefaces\paradise\domain\Document.class
+org\primefaces\paradise\converter\Language.class
 org\primefaces\paradise\security\UserDetailsUtil.class
 org\primefaces\paradise\view\ChronolineView.class
 org\primefaces\paradise\view\GridDemoView.class
 org\primefaces\paradise\security\ApplicationUserDetailsService.class
+org\primefaces\paradise\converter\LanguageConverter.class
 org\primefaces\paradise\domain\CustomerStatus.class
 org\primefaces\paradise\repository\RoleRepository.class
 org\primefaces\paradise\repository\GuestPreferenceRepository.class

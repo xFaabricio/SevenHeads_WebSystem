@@ -19,6 +19,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.ResourceBundle;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
@@ -35,6 +36,7 @@ import javax.persistence.Transient;
 
 import org.primefaces.PrimeFaces;
 import org.primefaces.paradise.controller.GuestPreferencesController;
+import org.primefaces.paradise.converter.Language;
 import org.primefaces.paradise.entity.User;
 import org.primefaces.paradise.security.UserDetailsUtil;
 
@@ -90,7 +92,15 @@ public class GuestPreferences implements Serializable {
     private boolean calledFirstTime = false;
     
     @Transient
-    private String localeSelected = "pt-BR";
+    private Language language;
+    
+    @Transient
+    private List<Language> languageList;
+    
+    private String locale;
+    
+    @Transient
+    private Locale userLocale;
     
     @PostConstruct
     public void init() {
@@ -125,6 +135,16 @@ public class GuestPreferences implements Serializable {
         specialLayouts.add(new SpecialLayout("Opa", "opa", "#3d7eaa", "#ffe47a"));
         specialLayouts.add(new SpecialLayout("Sunset", "sunset", "#e96443", "#904e95"));
         specialLayouts.add(new SpecialLayout("Smoke", "smoke", "#5b5b5b", "#5b5b5b"));
+        
+        languageList = new ArrayList<>();
+        
+        ResourceBundle message = ResourceBundle.getBundle("i18n.messages");        
+        languageList.add(new Language(message.getString("portuguese"), "Brazil"));
+        languageList.add(new Language(message.getString("english"), "United-States"));
+        languageList.add(new Language(message.getString("spanish"), "Spain"));
+        languageList.add(new Language(message.getString("chinese"), "China"));
+        
+        updateLocal();
     }
 
     public String getLayout() {
@@ -352,7 +372,7 @@ public class GuestPreferences implements Serializable {
 	    	PrimeFaces.current().executeScript("$('.topbar-wrapper').removeClass('layout-theme-dark-topbar');");
     	}
     	
-    	facesContext.getPartialViewContext().getRenderIds().add("topbar-logo");
+//    	facesContext.getPartialViewContext().getRenderIds().add("topbar-logo");
     	facesContext.getPartialViewContext().getRenderIds().add("config-form");
     	
     	if(this.darkTheme != this.loadedGuestPreferences.getDarkTheme()) {
@@ -398,6 +418,7 @@ public class GuestPreferences implements Serializable {
 		if(!calledFirstTime) {
 			loadGuestPreferencesByLogin(login);		
 			PrimeFaces.current().executeScript("PrimeFaces.ParadiseConfigurator.changePrimaryColor('"+getLayout()+"');");
+			PrimeFaces.current().executeScript("window.location.reload(true)");			
 			calledFirstTime = true;
 		}
 		return login;
@@ -412,20 +433,115 @@ public class GuestPreferences implements Serializable {
 	    setLogoBlack(loadedGuestPreferences.isLogoBlack());
 	    setTheme(loadedGuestPreferences.getTheme());
 	    setInputStyle(loadedGuestPreferences.getInputStyle());
+	    setLocale(loadedGuestPreferences.getLocale());
 	    this.user = loadedGuestPreferences.getUser();
-	    this.id = loadedGuestPreferences.getId();		
+	    this.id = loadedGuestPreferences.getId();
+	    loadLocale();
 	}
 
-	public String getLocaleSelected() {
-		return localeSelected;
-	}
-
-	public void setLocaleSelected(String localeSelected) {
-		this.localeSelected = localeSelected;
+	@SuppressWarnings("static-access")
+	public void loadLocale() {
+		if(this.loadedGuestPreferences != null && this.loadedGuestPreferences.getLocale() != null) {			
+			if(this.loadedGuestPreferences.getLocale().equals("Brazil")){
+				this.userLocale = new Locale("pt", "BR"); 
+				FacesContext.getCurrentInstance().getViewRoot().setLocale(this.userLocale);
+				FacesContext.getCurrentInstance().getExternalContext().getRequestLocale().setDefault(this.userLocale);
+			}else if(this.loadedGuestPreferences.getLocale().equals("United-States")){
+				this.userLocale = new Locale("en", "US"); 
+				FacesContext.getCurrentInstance().getViewRoot().setLocale(this.userLocale);
+				FacesContext.getCurrentInstance().getExternalContext().getRequestLocale().setDefault(this.userLocale);
+			}else if(this.loadedGuestPreferences.getLocale().equals("Spain")){
+				this.userLocale = new Locale("es", "ES"); 				
+				FacesContext.getCurrentInstance().getViewRoot().setLocale(this.userLocale);
+				FacesContext.getCurrentInstance().getExternalContext().getRequestLocale().setDefault(this.userLocale);
+			}else if(this.loadedGuestPreferences.getLocale().equals("China")){
+				this.userLocale = new Locale("zh", "CN"); 
+				FacesContext.getCurrentInstance().getViewRoot().setLocale(this.userLocale);
+				FacesContext.getCurrentInstance().getExternalContext().getRequestLocale().setDefault(this.userLocale);
+			}else {
+				this.userLocale = new Locale("pt", "BR"); 
+				FacesContext.getCurrentInstance().getViewRoot().setLocale(this.userLocale);
+				FacesContext.getCurrentInstance().getExternalContext().getRequestLocale().setDefault(this.userLocale);
+			}			
+			
+			this.locale = this.loadedGuestPreferences.getLocale();			
+		}
 	}
 	
-	public void updateLocal() {
-		FacesContext.getCurrentInstance().getViewRoot().setLocale(new Locale("en", "US"));
+	public Language getLanguage() {
+		return language;
 	}
+
+	public void setLanguage(Language language) {
+		this.language = language;
+	}
+
+	public List<Language> getLanguageList() {
+		return languageList;
+	}
+
+	public void setLanguageList(List<Language> languageList) {
+		this.languageList = languageList;
+	}
+
+	@SuppressWarnings("static-access")
+	public void updateLocal() {			
+		if(locale == null) {
+			if(FacesContext.getCurrentInstance() != null) {
+				this.userLocale = new Locale("pt", "BR"); 
+				FacesContext.getCurrentInstance().getViewRoot().setLocale(this.userLocale);
+				FacesContext.getCurrentInstance().getExternalContext().getRequestLocale().setDefault(this.userLocale);
+			}
+		}else {
+			if(locale.equals("Brazil")){
+				this.userLocale = new Locale("pt", "BR"); 
+				FacesContext.getCurrentInstance().getViewRoot().setLocale(this.userLocale);
+				FacesContext.getCurrentInstance().getExternalContext().getRequestLocale().setDefault(this.userLocale);
+				this.loadedGuestPreferences.setLocale(locale);
+			}else if(locale.equals("United-States")){
+				this.userLocale = new Locale("en", "US"); 
+				FacesContext.getCurrentInstance().getViewRoot().setLocale(this.userLocale);
+				FacesContext.getCurrentInstance().getExternalContext().getRequestLocale().setDefault(this.userLocale);
+				this.loadedGuestPreferences.setLocale(locale);
+			}else if(locale.equals("Spain")){
+				this.userLocale = new Locale("es", "ES"); 
+				FacesContext.getCurrentInstance().getViewRoot().setLocale(this.userLocale);
+				FacesContext.getCurrentInstance().getExternalContext().getRequestLocale().setDefault(this.userLocale);
+				this.loadedGuestPreferences.setLocale(locale);
+			}else if(locale.equals("China")){
+				this.userLocale = new Locale("zh", "CN"); 
+				FacesContext.getCurrentInstance().getViewRoot().setLocale(this.userLocale);
+				FacesContext.getCurrentInstance().getExternalContext().getRequestLocale().setDefault(this.userLocale);
+				this.loadedGuestPreferences.setLocale(locale);
+			}else {
+				this.userLocale = new Locale("pt", "BR"); 
+				FacesContext.getCurrentInstance().getViewRoot().setLocale(this.userLocale);
+				FacesContext.getCurrentInstance().getExternalContext().getRequestLocale().setDefault(this.userLocale);
+				this.loadedGuestPreferences.setLocale("Brazil");
+			}
+			
+			this.locale = this.loadedGuestPreferences.getLocale();			
+			
+			if(guestPreferencesController != null) {
+				guestPreferencesController.update(this.loadedGuestPreferences);
+			}
+		}				
+	}
+
+	public String getLocale() {
+		return locale;
+	}
+
+	public void setLocale(String locale) {
+		this.locale = locale;
+	}
+
+	public Locale getUserLocale() {
+		return userLocale;
+	}
+
+	public void setUserLocale(Locale userLocale) {
+		this.userLocale = userLocale;
+	}	
 	
 }

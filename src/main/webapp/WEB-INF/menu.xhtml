@@ -23,7 +23,7 @@
                     </p:submenu>                    
                     <p:submenu id="m_admin_config" label="Admin" icon="pi pi-cog" rendered="#{authorization.isAdmin()}">
                     	<p:submenu id="m_admin" icon="pi pi-cog" label="Manage">
-                    		<p:menuitem id="m_admin_users" icon="fa fa-user" value="Users" outcome="/users"/>
+                    		<p:menuitem id="m_admin_users" icon="fa fa-user" value="#{message.users}" outcome="/users"/>
                     	</p:submenu>
                     </p:submenu>                    
                     <p:submenu id="logout" label="Logout" icon="pi pi-power-off">

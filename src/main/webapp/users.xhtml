@@ -32,7 +32,8 @@
                                     selection="#{usersView.selectedUsers}" rowKey="#{user.id}" paginator="true" rows="10" rowSelectMode="add" paginatorPosition="bottom">
                             <f:facet name="header">
                                 <div class="users-table-header">
-                                    <span style="font-weight: bold">Manage Users</span>
+                                
+                                    <span style="font-weight: bold"><p:outputLabel value="#{message.users}" /></span>
                                 
                                     <span class="filter-container ui-input-icon-left">
                                         <i class="pi pi-search"></i>

@@ -24,13 +24,20 @@
 		                <p:inputText type="text" styleClass="topbar-search" placeholder="#{message.typeyoursearchhere}" id="topbar-search" />
 		            </div>
 	            </p:outputPanel>
-	            <div class="topbar-right">	            	
-	                <p:selectOneMenu id="option" value="#{guestPreferences.localeSelected}">
-	                	<p:ajax event="change" listener="#{guestPreferences.updateLocal()}" update="topbar-logo"/>	                    
-	                    <f:selectItem itemLabel="Português (Brasil)" itemValue="pt-BR"/>
-	                    <f:selectItem itemLabel="Inglês" itemValue="en-US"/>
-	                    <f:selectItem itemLabel="Espanhol" itemValue="es-ES"/>	                    
+	            <h:form id="formLanguage" style="margin-left: 55%">
+	            	<p:outputLabel value="🌎 #{message.language}:" style="margin-right: 10px"/>
+	                <p:selectOneMenu id="option" value="#{guestPreferences.locale}" style="margin-right: 15px">
+	                	<p:ajax event="change" listener="#{guestPreferences.updateLocal()}" process="@this"/>
+	                	<f:selectItem itemLabel="#{message.portuguese}" itemValue="Brazil"/>
+	                    <f:selectItem itemLabel="#{message.english}" itemValue="United-States"/>
+	                    <f:selectItem itemLabel="#{message.spanish}" itemValue="Spain"/>
+	                    <f:selectItem itemLabel="#{message.chinese}" itemValue="China"/>	                	
+<!-- 	                	<p:column style="display: flex;flex-wrap: nowrap;justify-content: center;"> -->
+<!-- 	                		<p:graphicImage name="images/dashboard/#{f.flag}.svg" style="border: 0px;max-width: 60px;" library="paradise-layout"/> -->
+<!-- 	                	</p:column> -->
 	                </p:selectOneMenu>
+                </h:form>
+	            <div class="topbar-right">	            	
 	                <a href="#" id="user-display">
 	                    <span class="username">
 	                    	<p:outputLabel value="#{guestPreferences.login}"></p:outputLabel>

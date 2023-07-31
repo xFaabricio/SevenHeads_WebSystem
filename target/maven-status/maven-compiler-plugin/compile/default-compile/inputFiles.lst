@@ -1,6 +1,7 @@
 C:\git\paradise\src\main\java\org\primefaces\paradise\repository\GuestPreferenceRepository.java
 C:\git\paradise\src\main\java\org\primefaces\paradise\view\ChronolineView.java
 C:\git\paradise\src\main\java\org\primefaces\paradise\service\ProductService.java
+C:\git\paradise\src\main\java\org\primefaces\paradise\converter\Language.java
 C:\git\paradise\src\main\java\org\primefaces\paradise\view\GuestPreferences.java
 C:\git\paradise\src\main\java\org\primefaces\paradise\service\SmsService.java
 C:\git\paradise\src\main\java\org\primefaces\paradise\domain\CustomerStatus.java
@@ -23,6 +24,7 @@ C:\git\paradise\src\main\java\org\primefaces\paradise\blockviewer\BlockViewer.ja
 C:\git\paradise\src\main\java\org\primefaces\paradise\domain\Order.java
 C:\git\paradise\src\main\java\org\primefaces\paradise\util\SpringUtils.java
 C:\git\paradise\src\main\java\org\primefaces\paradise\controller\UserController.java
+C:\git\paradise\src\main\java\org\primefaces\paradise\converter\LanguageConverter.java
 C:\git\paradise\src\main\java\org\primefaces\paradise\jpa\EntityFactory.java
 C:\git\paradise\src\main\java\org\primefaces\paradise\security\AuthenticationFailureHandlerManagerImpl.java
 C:\git\paradise\src\main\java\org\primefaces\paradise\controller\GuestPreferencesController.java
