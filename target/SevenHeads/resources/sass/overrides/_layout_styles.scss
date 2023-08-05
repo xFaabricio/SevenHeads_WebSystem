@@ -1,0 +1,34 @@
+/* Add your customizations of layout here */
+
+.layout-theme-dark {
+	background-color: #121212 !important;
+}
+.layout-theme-dark-card {
+	background-color: #1e1e1e !important;
+}
+.layout-theme-dark-topbar {
+	background-color: #393b3e;
+    box-shadow: inset 0 0 0 20px #393b3e;;
+}
+.layout-theme-dark-table-td {
+	border: 1px solid rgb(255 255 255 / 8%) !important;
+    border-width: 0 0 1px 0 !important;
+}
+.ui-state-hover-red{
+	color: #d51616 !important;
+}
+.layout-theme-dark-table-th {
+	border: 1px solid rgb(255 255 255 / 55%) !important;
+    border-width: 0 0 1px 0 !important;
+    background-color: #403f3f !important;
+}
+.layout-theme-dark-ul-li {
+	border: 1px solid rgb(255 255 255 / 8%) !important;
+}
+.layout-theme-dark-footer {
+	background-color: #1e1e1e !important;
+	border-top: 1px solid #1e1e1e !important;
+    border-bottom: 1px solid #1e1e1e !important;
+}
+
+/* Add your customizations of layout here */

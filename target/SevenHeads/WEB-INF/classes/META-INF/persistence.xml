@@ -1,0 +1,24 @@
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+             http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+             version="2.1">
+
+    <persistence-unit name="sevenHeadsDB" transaction-type="RESOURCE_LOCAL">
+
+        <properties>
+            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" /> <!-- DB Driver -->
+            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://ec2-3-234-126-10.compute-1.amazonaws.com:5432/d2ejkdi3cf26d3" /> <!-- BD Mane -->
+            <property name="javax.persistence.jdbc.user" value="gvvofnrpzwtvwr" /> <!-- DB User -->
+            <property name="javax.persistence.jdbc.password" value="36ce814a7651a53d083414767cffa1cb7fe2ba6462bac9a6bfb0b61fffcf3d20" /> <!-- DB Password -->
+
+	    	<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/> <!-- DB Dialect -->
+            <property name="hibernate.hbm2ddl.auto" value="update" /> <!-- create / create-drop / update -->
+            
+            <property name="hibernate.show_sql" value="true" /> <!-- Show SQL in console -->
+            <property name="hibernate.format_sql" value="false" /> <!-- Show SQL formatted -->
+        </properties>
+
+    </persistence-unit>
+
+</persistence>
