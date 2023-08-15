@@ -15,19 +15,19 @@
                     <input type="text" class="topbar-search" placeholder="Type your search here"/>
                 </div>
                 <pv:menu widgetVar="paradiseMenuWidget">                    
-                    <p:submenu id="m_homepage" label="Favorites" icon="pi pi-home">
-                        <p:menuitem id="m_dashboard" value="Dashboard" icon="pi pi-home" outcome="/dashboard"/>
+                    <p:submenu id="m_homepage" label="#{message.favorites}" icon="pi pi-home">
+                        <p:menuitem id="m_dashboard" value="#{message.dashboard}" icon="pi pi-home" outcome="/dashboard"/>
                     </p:submenu>
-                    <p:submenu id="m_api" label="Api" icon="pi pi-cloud">
-                        <p:menuitem id="m_api_item" value="Api" icon="pi pi-cloud" outcome="/api"/>
+                    <p:submenu id="m_api" label="#{message.dashboard}" icon="pi pi-cloud">
+                        <p:menuitem id="m_api_item" value="#{message.api}" icon="pi pi-cloud" outcome="/api"/>
                     </p:submenu>                    
-                    <p:submenu id="m_admin_config" label="Admin" icon="pi pi-cog" rendered="#{authorization.isAdmin()}">
-                    	<p:submenu id="m_admin" icon="pi pi-cog" label="Manage">
+                    <p:submenu id="m_admin_config" label="#{message.admin}" icon="pi pi-cog" rendered="#{authorization.isAdmin()}">
+                    	<p:submenu id="m_admin" icon="pi pi-cog" label="#{message.manage}">
                     		<p:menuitem id="m_admin_users" icon="fa fa-user" value="#{message.users}" outcome="/users"/>
                     	</p:submenu>
                     </p:submenu>                    
-                    <p:submenu id="logout" label="Logout" icon="pi pi-power-off">
-                    	<p:menuitem id="logout-item" value="Logout" icon="pi pi-power-off" url="/logout"/>
+                    <p:submenu id="logout" label="#{message.logout}" icon="pi pi-power-off">
+                    	<p:menuitem id="logout-item" value="#{message.logout}" icon="pi pi-power-off" url="/logout"/>
                     </p:submenu>
                 </pv:menu>
             </h:form>

@@ -24,7 +24,7 @@
 		                <p:inputText type="text" styleClass="topbar-search" placeholder="#{message.typeyoursearchhere}" id="topbar-search" />
 		            </div>
 	            </p:outputPanel>
-	            <h:form id="formLanguage" style="margin-left: 55%">
+	            <h:form id="formLanguage" style="display: block;right: 5px;position: absolute;margin-top: 100px;">
 	            	<p:outputLabel value="🌎 #{message.language}:" style="margin-right: 10px"/>
 	                <p:selectOneMenu id="option" value="#{guestPreferences.locale}" style="margin-right: 15px">
 	                	<p:ajax event="change" listener="#{guestPreferences.updateLocal()}" update="@all" process="@this"/>
@@ -48,31 +48,31 @@
 	                    <li>
 	                        <a href="#">
 	                            <i class="topbar-icon pi pi-fw pi-user"></i>
-	                            <span class="topbar-item-name">Profile</span>
+	                            <span class="topbar-item-name">#{message.profile}</span>
 	                        </a>
 	                        <ul>
 	                            <li role="menuitem">
 	                                <a href="#">
 	                                    <i class="pi pi-fw pi-user"></i>
-	                                    <span>Profile</span>
+	                                    <span>#{message.profile}</span>
 	                                </a>
 	                            </li>
 	                            <li role="menuitem">
 	                                <a href="#">
 	                                    <i class="pi pi-fw pi-lock"></i>
-	                                    <span>Privacy</span>
+	                                    <span>#{message.privacy}</span>
 	                                </a>
 	                            </li>
 	                            <li role="menuitem">
 	                                <a href="#">
 	                                    <i class="pi pi-fw pi-cog"></i>
-	                                    <span>Settings</span>
+	                                    <span>#{message.settings}</span>
 	                                </a>
 	                            </li>
 	                            <li role="menuitem">
 	                                <a href="/logout">
 	                                    <i class="pi pi-fw pi-sign-out"></i>
-	                                    <span>Logout</span>
+	                                    <span>#{message.logout}</span>
 	                                </a>
 	                            </li>
 	                        </ul>
@@ -80,33 +80,33 @@
 	                    <li>
 	                        <a href="#">
 	                            <i class="topbar-icon pi pi-fw pi-cog"></i>
-	                            <span class="topbar-item-name">Settings</span>
+	                            <span class="topbar-item-name">#{message.settings}</span>
 	                        </a>
 	                        <ul>
 	                            <li role="menuitem">
 	                                <a href="#">
 	                                    <i class="pi pi-fw pi-palette"></i>
-	                                    <span>Change Theme</span>
+	                                    <span>#{message.changetheme}</span>
 	                                    <span class="topbar-badge">1</span>
 	                                </a>
 	                            </li>
 	                            <li role="menuitem">
 	                                <a href="#">
 	                                    <i class="pi pi-fw pi-star"></i>
-	                                    <span>Favorites</span>
+	                                    <span>#{message.favorites}</span>
 	                                </a>
 	                            </li>
 	                            <li role="menuitem">
 	                                <a href="#">
 	                                    <i class="pi pi-fw pi-lock"></i>
-	                                    <span>Lock Screen</span>
+	                                    <span>#{message.lockscreen}</span>
 	                                    <span class="topbar-badge">3</span>
 	                                </a>
 	                            </li>
 	                            <li role="menuitem">
 	                                <a href="#">
 	                                    <i class="pi pi-fw pi-image"></i>
-	                                    <span>Wallpaper</span>
+	                                    <span>#{message.wallpaper}</span>
 	                                </a>
 	                            </li>
 	                        </ul>
@@ -114,38 +114,38 @@
 	                    <li>
 	                        <a href="#">
 	                            <i class="topbar-icon material-icons animated swing pi pi-fw pi-envelope"></i>
-	                            <span class="topbar-item-name">Messages</span>
+	                            <span class="topbar-item-name">#{message.messages}</span>
 	                            <span class="topbar-badge animated rubberBand">4</span>
 	                        </a>
 	                        <ul>
 	                            <li role="menuitem">
 	                                <a href="#" class="topbar-message">
 	                                    <p:graphicImage name="images/avatar1.png" library="paradise-layout" width="35"/>
-	                                    <span>Give me a call</span>
+	                                    <span>#{message.givemeacall}</span>
 	                                </a>
 	                            </li>
 	                            <li role="menuitem">
 	                                <a href="#" class="topbar-message">
 	                                    <p:graphicImage name="images/avatar2.png" library="paradise-layout" width="35"/>
-	                                    <span>Reports attached</span>
+	                                    <span>#{message.reportsattached}</span>
 	                                </a>
 	                            </li>
 	                            <li role="menuitem">
 	                                <a href="#" class="topbar-message">
 	                                    <p:graphicImage name="images/avatar3.png" library="paradise-layout" width="35"/>
-	                                    <span>About your invoice</span>
+	                                    <span>#{message.aboutyourinvoice}</span>
 	                                </a>
 	                            </li>
 	                            <li role="menuitem">
 	                                <a href="#" class="topbar-message">
 	                                    <p:graphicImage name="images/avatar2.png" library="paradise-layout" width="35"/>
-	                                    <span>Meeting today</span>
+	                                    <span>#{message.meetingtoday}</span>
 	                                </a>
 	                            </li>
 	                            <li role="menuitem">
 	                                <a href="#" class="topbar-message">
 	                                    <p:graphicImage name="images/avatar4.png" library="paradise-layout" width="35"/>
-	                                    <span>Out of office</span>
+	                                    <span>#{message.outofoffice}</span>
 	                                </a>
 	                            </li>
 	                        </ul>
@@ -153,32 +153,32 @@
 	                    <li>
 	                        <a href="#">
 	                            <i class="topbar-icon pi pi-fw pi-bell"></i>
-	                            <span class="topbar-item-name">Notifications</span>
+	                            <span class="topbar-item-name">#{message.notifications}</span>
 	                            <span class="topbar-badge animated rubberBand">2</span>
 	                        </a>
 	                        <ul>
 	                            <li role="menuitem">
 	                                <a href="#">
 	                                    <i class="pi pi-fw pi-sliders-h"></i>
-	                                    <span>Pending tasks</span>
+	                                    <span>#{message.pendingtasks}</span>
 	                                </a>
 	                            </li>
 	                            <li role="menuitem">
 	                                <a href="#">
 	                                    <i class="pi pi-fw pi-calendar"></i>
-	                                    <span>Meeting today</span>
+	                                    <span>#{message.meetingtoday}</span>
 	                                </a>
 	                            </li>
 	                            <li role="menuitem">
 	                                <a href="#">
 	                                    <i class="pi pi-fw pi-download"></i>
-	                                    <span>Download</span>
+	                                    <span>#{message.download}</span>
 	                                </a>
 	                            </li>
 	                            <li role="menuitem">
 	                                <a href="#">
 	                                    <i class="pi pi-fw pi-ticket"></i>
-	                                    <span>Book flight</span>
+	                                    <span>#{message.bookflight}</span>
 	                                </a>
 	                            </li>
 	                        </ul>
