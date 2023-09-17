@@ -17,7 +17,7 @@
                         <p:toolbar id="crud-userToolbar" styleClass="mb-4">
                             <p:toolbarGroup>
                                 <p:commandButton id="delete-users-button" value="#{usersView.deleteButtonMessage}" icon="pi pi-trash" actionListener="#{usersView.deleteSelectedUsers}"
-                                    styleClass="ui-button-danger" disabled="#{!usersView.hasSelectedUsers()}" update="@this">
+                                    styleClass="ui-button-danger" disabled="#{!(usersView.selectedUsers != null and !empty usersView.selectedUsers)}" update="@this">
                                     <p:confirm header="Confirmation" message="Delete the selected users?" icon="pi pi-exclamation-triangle" />
                                 </p:commandButton>
                             </p:toolbarGroup>
@@ -88,15 +88,15 @@
                         	<p:fileUpload value="" mode="simple" skinSimple="true" style="margin: 5px;" label="Upload new user photo"/>
                         	<p:graphicImage name="images/avatar5.png" library="paradise-layout" style="border: 0px;margin: 0 auto 2rem auto; display: block;" />                        	                        
                             <p:outputPanel id="manage-user-content" class="ui-fluid">
-                                <p:outputPanel rendered="#{not empty usersView.selectedUser}">
+                                <p:outputPanel>
                                 	<div class="formgrid grid">                                    
 	                                    <div class="field col">
 	                                        <p:outputLabel for="name">Name</p:outputLabel>
 	                                        <p:inputText id="name" value="#{usersView.selectedUser.name}" />
 	                                    </div>
 	                                    <div class="field col">
-	                                        <p:outputLabel for="description">Login</p:outputLabel>
-	                                        <p:inputText id="description" value="#{usersView.selectedUser.login}" required="true"/>
+	                                        <p:outputLabel for="login">Login</p:outputLabel>
+	                                        <p:inputText id="login" value="#{usersView.selectedUser.login}" required="true"/>
 	                                    </div>
 	                                </div>
 	                                <div class="formgrid grid">

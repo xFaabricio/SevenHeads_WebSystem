@@ -1,0 +1,110 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+             
+    <ui:define name="title">Form Service</ui:define>
+
+    <ui:define name="content">
+        <h:form id="form">
+            <div class="grid crud-demo">
+                <div class="col-12">
+                    <div class="card">
+                        <p:growl id="messages" showDetail="true" />
+
+                        <p:toolbar id="crud-formServiceToolbar" styleClass="mb-4">
+                            <p:toolbarGroup>
+                            	<p:commandButton value="New" icon="pi pi-plus" actionListener="#{formServiceView.openNew()}" update="manage-form-content" oncomplete="PF('manageFormDialog').show()"
+                                    styleClass="ui-button-success" style="margin-right: .5rem" />                                
+                            </p:toolbarGroup>
+                            <p:toolbarGroup align="right">                                
+                                <p:commandButton value="Export" icon="pi pi-upload" styleClass="ui-button-help" ajax="false">
+                                    <p:dataExporter type="pdf" target="dt-forms" fileName="forms"/>
+                                </p:commandButton>
+                            </p:toolbarGroup>
+                        </p:toolbar>
+
+                        <p:dataTable id="dt-forms" widgetVar="dtForms" var="form" value="#{formServiceView.formsService}" reflow="true" styleClass="forms-table"
+                                    rowKey="#{form.id}" paginator="true" rows="10" paginatorPosition="bottom">
+                            <f:facet name="header">
+                                <div class="forms-table-header">
+                                
+                                    <span style="font-weight: bold"><p:outputLabel value="Forms" /></span>
+                                
+                                    <span class="filter-container ui-input-icon-left">
+                                        <i class="pi pi-search"></i>
+                                        <p:inputText id="globalFilter" onkeyup="PF('dtForms').filter()" placeholder="Search" />
+                                    </span>
+                                </div>
+                            </f:facet>
+                                                       
+                            <p:column headerText="Name" sortBy="#{form.name}" filterBy="#{form.name}">
+                                <h:outputText value="#{form.name}" />
+                            </p:column>
+                            <p:column headerText="Description" sortBy="#{form.description}" filterBy="#{form.description}">
+                                <h:outputText value="#{form.description}" />
+                            </p:column>
+                            <p:column headerText="Key" sortBy="#{form.id}" filterBy="#{form.id}">
+                                <h:outputText value="#{form.id}" />
+                            </p:column>                            
+                            <p:column headerText="Active">
+                                <p:selectBooleanCheckbox value="#{form.active}" disabled="true"/>
+                            </p:column>                                                                                                     
+                            <p:column exportable="false">
+                                <p:commandButton icon="pi pi-pencil" update=":form:manage-form-content" oncomplete="PF('manageFormDialog').show()" 
+                                    styleClass="edit-button rounded-button ui-button-success" process="@this" actionListener="#{formServiceView.edit()}">
+                                    <f:setPropertyActionListener value="#{form}" target="#{formServiceView.selectedFormService}" />
+                                </p:commandButton>
+                                <p:commandButton class="ui-button-warning rounded-button" icon="pi pi-trash" process="@this" oncomplete="PF('deleteFormDialog').show()" >
+                                    <f:setPropertyActionListener value="#{form}" target="#{formServiceView.selectedFormService}" />
+                                </p:commandButton>
+                            </p:column>
+                        </p:dataTable>
+
+                        <p:dialog header="Form Details" showEffect="fade" modal="true" widgetVar="manageFormDialog" responsive="true">                        	                        	                        
+                            <p:outputPanel id="manage-form-content" class="ui-fluid">
+                                <p:outputPanel>
+                                	<div class="formgrid grid">                                    
+	                                    <div class="field col">
+	                                        <p:outputLabel for="name">Name</p:outputLabel>
+	                                        <p:inputText id="name" value="#{formServiceView.selectedFormService.name}" required="true"/>
+	                                    </div>
+	                                    <div class="field col">
+	                                        <p:outputLabel for="description">Description</p:outputLabel>
+	                                        <p:inputText id="description" value="#{formServiceView.selectedFormService.description}"/>
+	                                    </div>
+	                                </div>
+	                                <div class="formgrid grid">
+	                                    <div class="field col">
+	                                        <p:outputLabel for="key">Key</p:outputLabel>
+	                                        <p:inputText id="key" value="#{formServiceView.selectedFormService.id}" disabled="true"/>
+	                                    </div>	                                    
+                                    </div>                                    
+                                </p:outputPanel>
+                            </p:outputPanel>
+
+                            <f:facet name="footer">
+                                <p:commandButton value="Save" icon="pi pi-check" actionListener="#{formServiceView.saveForm}" update="manage-form-content" process="manage-form-content @this" />
+                                <p:commandButton value="Cancel" icon="pi pi-times" onclick="PF('manageFormDialog').hide()" class="ui-button-secondary" />
+                            </f:facet>
+                        </p:dialog> 
+
+                        <p:confirmDialog widgetVar="deleteFormDialog" showEffect="fade" width="300" message="Delete the form?" header="Confirm" severity="warn">
+                            <p:commandButton value="Yes" icon="pi pi-check" actionListener="#{formServiceView.deleteForm}" process="@this" oncomplete="PF('deleteFormDialog').hide()"/>
+                            <p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="pi pi-times" onclick="PF('deleteFormDialog').hide()" />
+                        </p:confirmDialog>
+
+                        <p:confirmDialog global="true" showEffect="fade" width="300">
+                            <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+                            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no ui-button-secondary" icon="pi pi-times" />
+                        </p:confirmDialog>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>

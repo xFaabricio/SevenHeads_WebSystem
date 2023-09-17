@@ -19,7 +19,7 @@
                                 <p:commandButton value="New" icon="pi pi-plus" actionListener="#{crudDemoView.openNew}" update="manage-product-content" oncomplete="PF('manageProductDialog').show()"
                                     styleClass="ui-button-success" style="margin-right: .5rem" />
                                 <p:commandButton id="delete-products-button" value="#{crudDemoView.deleteButtonMessage}" icon="pi pi-trash" actionListener="#{crudDemoView.deleteSelectedProducts}"
-                                    styleClass="ui-button-danger" disabled="#{!crudDemoView.hasSelectedProducts()}" update="@this">
+                                    styleClass="ui-button-danger" disabled="#{!(crudDemoView.selectedProducts != null and !empty crudDemoView.selectedProducts)}" update="@this">
                                     <p:confirm header="Confirmation" message="Delete the selected products?" icon="pi pi-exclamation-triangle" />
                                 </p:commandButton>
                             </p:toolbarGroup>
@@ -124,7 +124,7 @@
 
                         <p:dialog header="Product Details" showEffect="fade" modal="true" widgetVar="manageProductDialog" responsive="true">
                             <p:outputPanel id="manage-product-content" class="ui-fluid">
-                                <p:outputPanel rendered="#{not empty crudDemoView.selectedProduct}">
+                                <p:outputPanel>
                                     <p:graphicImage name="images/product/#{crudDemoView.selectedProduct.image}" library="demo" styleClass="product-image" rendered="#{not empty crudDemoView.selectedProduct.image}" />
                                     <div class="field">
                                         <p:outputLabel for="name">Name</p:outputLabel>

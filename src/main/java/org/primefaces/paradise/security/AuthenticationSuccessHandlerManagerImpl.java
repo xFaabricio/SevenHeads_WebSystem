@@ -26,27 +26,27 @@ public class AuthenticationSuccessHandlerManagerImpl implements AuthenticationSu
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
-		// TODO Auto-generated method stub
 		List<SimpleGrantedAuthority> roles = new ArrayList<>();
 		roles.add(new SimpleGrantedAuthority("UNAUTHORIZED"));
 		
 		User user = userController.findByLogin(authentication.getName());
-		
-		if(user != null && (user.getBlocked() != null && user.getBlocked())) {
-			invalidateSession(request);
-			response.sendRedirect(request.getContextPath() + "/login.xhtml?error=blockedUser");			
-			return;					
-		} else {
-			if(user.getActive() != null && user.getActive()) {
-				user.setTryQuantity(0);
-				userController.update(user);
+		if(user != null) {
+			if((user.getBlocked() != null && user.getBlocked())) {
+				invalidateSession(request);
+				response.sendRedirect(request.getContextPath() + "/login.xhtml?error=blockedUser");			
+				return;					
+			} else {
+				if(user.getActive() != null && Boolean.TRUE.equals(user.getActive())) {
+					user.setTryQuantity(0);
+					userController.update(user);
+				}
 			}
-		}
-		
-		if(user != null && (user.getActive() != null && !user.getActive())) {			
-			invalidateSession(request);
-			response.sendRedirect(request.getContextPath() + "/login.xhtml?error=deletedUser");			
-			return;
+			
+			if(user.getActive() != null && !user.getActive()) {			
+				invalidateSession(request);
+				response.sendRedirect(request.getContextPath() + "/login.xhtml?error=deletedUser");			
+				return;
+			}
 		}
 		
 		response.sendRedirect(request.getContextPath() + "/dashboard.xhtml");

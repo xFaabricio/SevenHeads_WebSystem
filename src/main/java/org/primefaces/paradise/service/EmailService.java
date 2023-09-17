@@ -1003,7 +1003,7 @@ public class EmailService {
 				+ "                              <tr>\r\n"
 				+ "                                <td class=\"pad\" style=\"width:100%;padding-right:0px;padding-left:0px;\">\r\n"
 				+ "                                  <div align=\"center\" class=\"alignment\" style=\"line-height:10px\">\r\n"
-				+ "                                    <img alt=\"Alternate text\" src=\"https://system.sevenheads.com.br/javax.faces.resource/images/logo-black.png.xhtml?ln=paradise-layout\" style=\"display: block; height: auto; border: 0; width: 154px; max-width: 100%;\" title=\"Alternate text\" width=\"154\" />\r\n"
+				+ "                                    <img alt=\"Alternate text\" src=\"https://system.sevenheads.com.br/javax.faces.resource/images/SevenHeads-Gray-2.svg.xhtml?ln=paradise-layout\" style=\"display: block; height: auto; border: 0; width: 154px; max-width: 100%;\" title=\"Alternate text\" width=\"154\" />\r\n"
 				+ "                                  </div>\r\n"
 				+ "                                </td>\r\n"
 				+ "                              </tr>\r\n"

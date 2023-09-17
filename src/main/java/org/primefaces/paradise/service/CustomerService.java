@@ -15,17 +15,19 @@
  */
 package org.primefaces.paradise.service;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
+
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Named;
+
 import org.primefaces.paradise.domain.Country;
 import org.primefaces.paradise.domain.Customer;
 import org.primefaces.paradise.domain.CustomerStatus;
 import org.primefaces.paradise.domain.Representative;
-
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Named;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 
 @Named
 @ApplicationScoped

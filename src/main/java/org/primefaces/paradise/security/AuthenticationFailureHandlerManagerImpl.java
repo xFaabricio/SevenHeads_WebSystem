@@ -20,9 +20,7 @@ public class AuthenticationFailureHandlerManagerImpl implements AuthenticationFa
 	
 	@Override
 	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
-			AuthenticationException exception) throws IOException, ServletException {
-		// TODO Auto-generated method stub
-		
+			AuthenticationException exception) throws IOException, ServletException {		
 		String userName = request.getParameter("username");
 		User user = userController.findByLogin(userName);
 		

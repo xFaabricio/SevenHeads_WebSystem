@@ -34,6 +34,7 @@
 		<sec:intercept-url pattern="/dashboard.xhtml*" access="hasRole('ROLE_USER')" />
 		<sec:intercept-url pattern="/crud.xhtml*" access="hasRole('ROLE_USER')" />
 		<sec:intercept-url pattern="/api.xhtml*" access="hasRole('ROLE_ADMIN')" />
+		<sec:intercept-url pattern="/formService.xhtml*" access="hasRole('ROLE_USER')" />
 		<sec:intercept-url pattern="/users.xhtml*" access="hasRole('ROLE_ADMIN')" />		
 		<sec:intercept-url pattern="/error.xhtml*" access="isAuthenticated()" />
 		<sec:intercept-url pattern="/forgotPassword.xhtml*" access="permitAll" />
