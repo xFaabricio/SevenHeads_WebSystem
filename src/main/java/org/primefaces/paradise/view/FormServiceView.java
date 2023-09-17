@@ -17,6 +17,7 @@ import org.primefaces.PrimeFaces;
 import org.primefaces.paradise.controller.FormController;
 import org.primefaces.paradise.controller.UserController;
 import org.primefaces.paradise.entity.FormService;
+import org.primefaces.paradise.entity.FormServiceHistory;
 import org.primefaces.paradise.entity.User;
 import org.primefaces.paradise.security.UserDetailsUtil;
 
@@ -48,6 +49,16 @@ public class FormServiceView implements Serializable {
 			String login = UserDetailsUtil.getLoggedUser().getUsername();
 			User loggedUser = userController.findByLogin(login);		
 			formsService = formController.findByUser(loggedUser);
+			loadFormServiceHistory();
+		}
+	}
+	
+	public void loadFormServiceHistory() {
+		for(FormService form : formsService) {
+			List<FormServiceHistory> formServiceHistory = formController.findHistoryByFormService(form.getId());
+			if(formServiceHistory != null && !formServiceHistory.isEmpty()) {
+				form.setFormServiceHistory(formServiceHistory);
+			}
 		}
 	}
 	

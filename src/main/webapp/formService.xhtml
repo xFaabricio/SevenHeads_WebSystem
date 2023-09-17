@@ -39,7 +39,11 @@
                                     </span>
                                 </div>
                             </f:facet>
-                                                       
+							
+							<p:column style="width:4rem" headerText="History">
+				                <p:rowToggler/>
+				            </p:column>
+							
                             <p:column headerText="Name" sortBy="#{form.name}" filterBy="#{form.name}">
                                 <h:outputText value="#{form.name}" />
                             </p:column>
@@ -61,6 +65,20 @@
                                     <f:setPropertyActionListener value="#{form}" target="#{formServiceView.selectedFormService}" />
                                 </p:commandButton>
                             </p:column>
+                            
+                            <p:rowExpansion>
+                            	<p:dataTable id="dt-forms-history" widgetVar="dtFormsHistory" var="formHistory" value="#{form.formServiceHistory}" styleClass="forms-table" rowKey="#{formHistory.id}">
+                                    <p:column headerText="Date">
+                                    	<h:outputText value="#{formHistory.createDate}" >
+										    <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+										</h:outputText>
+                                    </p:column>
+                                    <p:column headerText="Message Json">
+                                    	<p:inputTextarea disabled="true" value="#{formHistory.message}" style="width: 100%" />
+                                    </p:column>
+                                </p:dataTable>
+                            </p:rowExpansion>
+                            
                         </p:dataTable>
 
                         <p:dialog header="Form Details" showEffect="fade" modal="true" widgetVar="manageFormDialog" responsive="true">                        	                        	                        
