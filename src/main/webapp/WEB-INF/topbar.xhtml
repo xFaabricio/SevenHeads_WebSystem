@@ -25,7 +25,7 @@
 		            </div>
 	            </p:outputPanel>
 	            <h:form id="formLanguage" style="display: block;right: 5px;position: absolute;margin-top: 100px;">
-	            	<p:outputLabel value="🌎 #{message.language}:" style="margin-right: 10px"/>
+	            	<p:outputLabel value="🌎 #{message.language}:" style="margin-right: 10px;color: darkgray;"/>
 	                <p:selectOneMenu id="option" value="#{guestPreferences.locale}" style="margin-right: 15px">
 	                	<p:ajax event="change" listener="#{guestPreferences.updateLocal()}" update="@all" process="@this"/>
 	                	<f:selectItem itemLabel="#{message.portuguese}" itemValue="Brazil"/>
