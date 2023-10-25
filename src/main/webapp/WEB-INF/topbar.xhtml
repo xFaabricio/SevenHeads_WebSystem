@@ -9,11 +9,11 @@
 	<p:panel id="topbar">
 	    <div class="topbar">
 	        <div class="topbar-wrapper">
-	        	<p:outputPanel id="topbar-logo" style="padding-left: 30px;">
+	        	<p:outputPanel id="topbar-logo" style="padding-left: 20px;">
 		            <div class="topbar-left">
 		                <h:link id="logolink" outcome="/dashboard" styleClass="topbar-logo">
 		                    <!--  <p:graphicImage name="images/#{guestPreferences.layout == 'default' ? 'logo-black.png' : 'logo-white.png'}" style="border: 0px;" library="paradise-layout" /> -->
-		                    <p:graphicImage name="images/#{guestPreferences.logoBlack ? 'SevenHeads-Black.svg' : 'SevenHeads-White.svg'}" style="border: 0px;max-width: 180px;" library="paradise-layout" />
+		                    <p:graphicImage name="images/#{guestPreferences.logoBlack ? 'Logo-SevenHeads-Porps-Black.svg' : 'Logo-SevenHeads-Porps-White.svg'}" style="border: 0px;max-width: 200px;" library="paradise-layout" />
 		                </h:link>
 		                <a href="#" id="menu-button">
 		                    <i class="pi pi-bars"></i>
@@ -25,7 +25,7 @@
 		            </div>
 	            </p:outputPanel>
 	            <h:form id="formLanguage" style="display: block;right: 5px;position: absolute;margin-top: 100px;">
-	            	<p:outputLabel value="🌎 #{message.language}:" style="margin-right: 10px;color: darkgray;"/>
+	            	<p:outputLabel value="🌎 #{message.language}:" style="margin-right: 10px;color: black;"/>
 	                <p:selectOneMenu id="option" value="#{guestPreferences.locale}" style="margin-right: 15px">
 	                	<p:ajax event="change" listener="#{guestPreferences.updateLocal()}" update="@all" process="@this"/>
 	                	<f:selectItem itemLabel="#{message.portuguese}" itemValue="Brazil"/>

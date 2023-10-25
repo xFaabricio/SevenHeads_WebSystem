@@ -372,7 +372,7 @@ public class GuestPreferences implements Serializable {
 	    	PrimeFaces.current().executeScript("$('.topbar-wrapper').removeClass('layout-theme-dark-topbar');");
     	}
     	
-//    	facesContext.getPartialViewContext().getRenderIds().add("topbar-logo");
+    	facesContext.getPartialViewContext().getRenderIds().add("topbar-logo");
     	facesContext.getPartialViewContext().getRenderIds().add("config-form");
     	
     	if(this.darkTheme != this.loadedGuestPreferences.getDarkTheme()) {
